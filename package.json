@@ -1,0 +1,46 @@
+{
+  "name": "back-end-aquatrack",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint src/**/*.js",
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js | pino-pretty",
+    "build": "npm run build-docs",
+    "build-docs": "redocly bundle --ext json -o docs/swagger.json",
+    "preview-docs": "redocly preview-docs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "cloudinary": "^2.3.0",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "google-auth-library": "^9.11.0",
+    "handlebars": "^4.7.8",
+    "http-errors": "^2.0.0",
+    "joi": "^17.13.3",
+    "jsonwebtoken": "^9.0.2",
+    "mongodb": "^6.8.0",
+    "mongoose": "^8.4.3",
+    "multer": "^1.4.5-lts.1",
+    "nodemailer": "^6.9.14",
+    "path": "^0.12.7",
+    "pino-http": "^10.2.0",
+    "pino-pretty": "^11.2.1",
+    "randombytes": "^2.1.0",
+    "swagger-ui-express": "^5.0.1"
+  },
+  "devDependencies": {
+    "@redocly/cli": "^1.18.0",
+    "eslint": "^9.5.0",
+    "nodemon": "^3.1.3"
+  }
+}
