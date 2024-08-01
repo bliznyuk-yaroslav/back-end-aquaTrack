@@ -34,7 +34,10 @@ const usersSchema = new Schema(
         },
         dailyNorma: {
             type: Number,
-        }
+        },
+        avatar: {
+            type: String
+        },
     },
     {timestamps: true, versionKey: false},
 );
