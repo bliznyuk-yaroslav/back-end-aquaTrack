@@ -1,17 +1,22 @@
 import { registerUser, loginUser, logoutUser, refreshUsersSession } from "../services/auth.js";
 import { REFRESH_TOKEN_LIFETIME } from '../constant/index.js';
 
-export const registerUserController = async (req, res) => {
+export const registerUserController = async (req, res, next) => {
+  try {
     const user = await registerUser(req.body);
     const data = {
-        name: user.name,
-        email: user.email,
+      name: user.name,
+      email: user.email,
+      accessToken: user.accessToken,
     };
     res.status(201).json({
-        status: 201,
-        message: "User successfully registered!",
-        data: data,
+      status: 201,
+      message: "User successfully registered!",
+      data: data,
     });
+  } catch (error) {
+    next(error);
+  }
 };
 
 export const loginUserController = async (req, res) => {

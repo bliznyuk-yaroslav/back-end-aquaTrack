@@ -6,16 +6,19 @@ import { SessionsCollection } from '../db/models/session.js';
 import { ACCESS_TOKEN_LIFETIME, REFRESH_TOKEN_LIFETIME } from '../constant/index.js';
 
 export const registerUser = async (payload) => {
-    const user = await UsersCollection.findOne({ email: payload.email });
-    if (user) {
-        throw createHttpError(409, "Email in use");
-    }
-    const encryptedPassword = await hashValue(payload.password);
+  const user = await UsersCollection.findOne({ email: payload.email });
+  if (user) {
+    throw createHttpError(409, "Email in use");
+  }
+  const encryptedPassword = await hashValue(payload.password);
+  const accessToken = randomBytes(30).toString('hex');
+  const newUser = await UsersCollection.create({
+    ...payload,
+    accessToken,
+    password: encryptedPassword,
+  });
 
-    return await UsersCollection.create({
-        ...payload,
-        password: encryptedPassword,
-    });
+  return newUser;
 };
 
 export const loginUser = async (payload) => {
