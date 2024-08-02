@@ -28,10 +28,9 @@ export const patchWater = async (filter, payload, options = {}) => {
     };
 };
 
-export const deleteWater = async (waterId, userId) => {
+export const deleteWater = async (waterId) => {
     const water = await WaterCollection.findOneAndDelete({
-        _id: waterId,
-    userId,
+    waterId,
     });
     return water;
 };

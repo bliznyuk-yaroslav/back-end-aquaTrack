@@ -56,19 +56,15 @@ export const patchWaterController = async (req, res, next) => {
 };
 
 export const deleteWaterController = async (req, res, next) => {
-    const { _id: userId } = req.user;
-    const { waterId } = req.params;
+    const { userId } = req.params;
 
-    try { 
-        const water = await deleteWater({ _id: waterId, userId });  
-        
-if (!water) {
-        next(createHttpError(404, 'No amount of water'));
-    return next(error);
+    const water = await deleteWater(userId);
+
+    if (!water) {
+        next(createHttpError(404, 'No amout of water found'));
+        return;
     }
-
-res.status(204).send();
-    } catch (error) {
-        next(error);
+    res.status(204).send();
 }
-};
+
+
