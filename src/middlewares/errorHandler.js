@@ -12,7 +12,7 @@ const errorHandler = (error, req, res, next) => {
   res.status(404).json({
     status: 404,
     message: 'Something went wrong',
-    data: { message: 'User not found' },
+    data: { message: 'Not found' },
   });
   next();
 };
