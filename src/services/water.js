@@ -1,7 +1,7 @@
 import { WaterCollection } from "../db/models/water.js";
 
 export const getWaterById = async (userId) => {
-    const water = await WaterCollection.findOne({ _id: userId, userId });
+    const water = await WaterCollection.findOne({ userId });
     return water;
 };
 
@@ -30,7 +30,7 @@ export const patchWater = async (filter, payload, options = {}) => {
 
 export const deleteWater = async (userId) => {
     const water = await WaterCollection.findOneAndDelete({
-        _id: userId,
+    userId,
     });
     return water;
 };

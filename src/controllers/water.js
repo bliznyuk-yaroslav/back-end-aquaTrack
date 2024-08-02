@@ -2,8 +2,7 @@ import { addWater, deleteWater, getWaterById, patchWater } from "../services/wat
 import createHttpError from "http-errors";
 
 export const getWaterByIdController = async (req, res, next) => {
-    try { 
-        const { _id: userId } = req.user;
+    try {
         const { userId } = req.params;
 
         const water = await getWaterById(userId);
@@ -18,7 +17,7 @@ export const getWaterByIdController = async (req, res, next) => {
     } catch (error) {
         next(error);
     }
-}
+};
 
 export const addWaterController = async (req, res) => {
     const water = await addWater(req.body);
