@@ -66,7 +66,7 @@ export const getWaterConsumptionByDate = async (userId, date) => {
 export const getMonthWater = async (userId, date) => {
   const [year, month] = date.split("-");
   const startDate = new Date(Date.UTC(year, month - 1, 1));
-  const endDate = new Date(Date.UTC(year, month, 0));
+  const endDate = new Date(Date.UTC(year, month, 0, 23, 59, 59, 999));
 
   const waterMonth = await WaterCollection.find({
     userId: userId,
