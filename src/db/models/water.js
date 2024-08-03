@@ -1,10 +1,20 @@
 import { Schema, model } from "mongoose";
 
+import { mongooseSaveError, setUpdateSettings } from './hooks.js';
+
 const waterSchema = new Schema(
     {
         amountOfWater: {
             type: Number,
             required: true,
+        },
+        time: {
+            type: String,
+            required: true,
+        },
+        date: {
+            type: Date,
+            default: new Date(),
         },
         dailyNorma: {
             type: Number,
@@ -25,5 +35,11 @@ const waterSchema = new Schema(
         versionKey: false,
     },
 );
+
+waterSchema.post('save', mongooseSaveError);
+
+waterSchema.pre('findOneAndUpdate', setUpdateSettings);
+
+waterSchema.post('findOneAndUpdate', mongooseSaveError);
 
 export const WaterCollection = model('water', waterSchema);

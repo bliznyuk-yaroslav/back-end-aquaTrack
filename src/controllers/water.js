@@ -1,24 +1,5 @@
-import { addWater, deleteWater, getWaterById, patchWater } from "../services/water.js";
+import { addWater, deleteWater, getWaterConsumptionByDate, patchWater } from "../services/water.js";
 import createHttpError from "http-errors";
-
-export const getWaterByIdController = async (req, res, next) => {
-    try {
-        const { _id: userId } = req.user;
-        const { waterId } = req.params;
-
-        const water = await getWaterById({_id: waterId, userId });
-        if (!water) {
-            return next(createHttpError(404, "Water amount not found..."));
-        }
-        res.status(200).json({
-            status: 200,
-            data: water,
-            message: `Successfully found amount of water for id ${userId}!`,
-        });
-    } catch (error) {
-        next(error);
-    }
-};
 
 export const addWaterController = async (req, res, next) => {
     const { _id: userId } = req.user;
@@ -43,7 +24,7 @@ export const patchWaterController = async (req, res, next) => {
         const result = await patchWater({ _id: waterId, userId }, req.body);
         if (!result) {
             next(createHttpError(404, 'Water amount not found!'));
-            return next(error);
+            return next();
         }
         res.json({
             status: 200,
@@ -65,6 +46,32 @@ export const deleteWaterController = async (req, res, next) => {
         return;
     }
     res.status(204).send();
-}
+};
+
+
+export const getWaterConsumptionController = async (req, res, next) => {
+  try {
+    const { _id: userId } = req.user;
+    const { date } = req.query; // Date should be passed as a query parameter
+
+    if (!date) {
+      return next(createHttpError(400, 'Date query parameter is required'));
+    }
+
+    const { waterData, totalAmount, percentageConsumed } = await getWaterConsumptionByDate(userId, date);
+
+    res.status(200).json({
+      status: 200,
+      message: 'Successfully retrieved water consumption data!',
+      data: {
+        waterData,
+        totalAmount,
+        percentageConsumed
+      }
+    });
+  } catch (error) {
+    next(error);
+  }
+};
 
 

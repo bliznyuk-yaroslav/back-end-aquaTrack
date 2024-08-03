@@ -34,6 +34,7 @@ const usersSchema = new Schema(
     },
     dailyNorma: {
       type: Number,
+      default: 1.5,
     },
     avatar: {
       type: String,
