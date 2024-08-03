@@ -89,9 +89,8 @@ export const getMonthWaterController = async (req, res, next) => {
         return res.status(400).json({ message: "Invalid date format! Use firstly year, then month" });
   }
 
-    const waterMonth = await getMonthWater(userId, `${yearNumber}-${monthNumber}`);
-
-
+      const waterMonth = await getMonthWater(userId, `${yearNumber}-${monthNumber}`);
+      
     res.status(200).json({
         status: 200,
         message: 'Successfully found amount of water for this month!',
