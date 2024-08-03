@@ -75,45 +75,12 @@ export const getMonthWater = async (userId, date) => {
       $lte: endDate
     }
   });
-  
-  const months = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
 
   const totalMonthlyWater = waterMonth.reduce((sum, entry) => sum + (entry.amountOfWater || 0), 0);
 
-  const result = waterMonth.map((entry) => {
-    const getMonth = entry.createdAt.getMonth();
-    const getDay = entry.createdAt.getDate();
-    const dailyNorma = entry.dailyNorma || 2;
-    const totalAmount = entry.totalAmount || 0;
-    const amountOfWater = entry.amountOfWater || 0;
-
-
-    return {
-      date: `${months[getMonth]}, ${getDay}`,
-      dailyNorma,
-      amountOfWater,
-      percentage: Math.floor((totalAmount / (dailyNorma * 1000)) * 100),
-      recordsWater: entry.entries ? entry.entries.length : 0,
-    };
-  });
-
   return {
-    totalMonthlyWater,
-    // records: result,
+totalMonthlyWater,
   };
+  
 };
 
-// рекордс - раптом треба вивести всі записи про додану воду за місяць
