@@ -34,3 +34,37 @@ export const deleteWater = async (waterId) => {
     });
     return water;
 };
+
+export const getMonthWater = async (userId, date) => {
+    const startDate = new Date(date);
+    const endDate = new Date(date);
+    
+    endDate.setMonth(startDate.getMonth() + 1);
+    endDate.setDate(0);
+
+    const waterMonth = await WaterCollection.find({
+        userId: userId,
+        createdAt: {
+            $gte: startDate,
+            $lte: endDate
+        }
+    });
+
+    if (waterMonth.length === 0) {
+        return {
+            waterMonth: [],
+            totalAmount: 0,
+            percentageConsumed: "0%",
+        };
+    }
+
+    const totalAmount = waterMonth.reduce((sum, record) => sum + record.amountOfWater, 0);
+    const monthWater = waterMonth[0].monthWater * 1000;
+    const percentageConsumed = ((totalAmount / monthWater) * 100).toFixed(2) + "%";
+
+    return {
+        waterMonth,
+        totalAmount,
+        percentageConsumed
+    };
+};

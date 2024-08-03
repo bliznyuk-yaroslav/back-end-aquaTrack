@@ -19,6 +19,9 @@ const waterSchema = new Schema(
             ref: 'users',
             required: true,
         },
+        monthWater: {
+            type: Number,
+        },
     },
     {
         timestamps: true,
