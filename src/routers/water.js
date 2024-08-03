@@ -15,7 +15,7 @@ router.post('/', validateBody(addWaterSchema), ctrlWrapper(addWaterController));
 router.patch('/:waterId', ctrlWrapper(patchWaterController));
 router.delete('/:waterId', ctrlWrapper(deleteWaterController));
 router.get('/consumption', ctrlWrapper(getWaterConsumptionController));
-router.get('/month/:date', isValidateMonth, ctrlWrapper(getMonthWaterController));
+router.get('/month/:month', isValidateMonth, ctrlWrapper(getMonthWaterController));
 
 
 export default router;
