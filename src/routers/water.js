@@ -12,7 +12,7 @@ const router = Router();
 router.use(authenticate);
 
 router.get('/:waterId', isValid, ctrlWrapper(getWaterByIdController));
-router.get('/month', ctrlWrapper(getMonthWaterController));
+router.get('/month/:date', ctrlWrapper(getMonthWaterController));
 router.post('/', validateBody(addWaterSchema), ctrlWrapper(addWaterController));
 router.patch('/:waterId', ctrlWrapper(patchWaterController));
 router.delete('/:waterId', ctrlWrapper(deleteWaterController));
