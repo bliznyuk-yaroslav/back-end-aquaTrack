@@ -78,20 +78,18 @@ export const getMonthWaterController = async (req, res, next) => {
     try {
     
     const { _id: userId } = req.user;
-    const { month } = req.params;
+      const { date } = req.params;
+      
+      const [month, year] = date.split("-");
         
-    const months = [
-      "january", "february", "march", "april", "may", "june",
-      "july", "august", "september", "october", "november", "december"
-    ];
+      const monthNumber = parseInt(month, 10);
+      const yearNumber = parseInt(year, 10);
         
-    const monthIndex = months.indexOf(month.toLowerCase());
-    if (monthIndex === -1) {
-    return res.status(400).json({ message: "Invalid month name!" });
-    }
+      if (isNaN(monthNumber) || isNaN(yearNumber) || monthNumber < 1 || monthNumber > 12) {
+        return res.status(400).json({ message: "Invalid date format! Use firstly month, then year" });
+  }
 
-    const year = new Date().getFullYear();
-    const waterMonth = await getMonthWater(userId, `${year}-${monthIndex + 1}`);
+    const waterMonth = await getMonthWater(userId, `${yearNumber}-${monthNumber}`);
 
 
     res.status(200).json({
