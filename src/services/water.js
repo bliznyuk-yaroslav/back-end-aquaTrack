@@ -98,11 +98,13 @@ export const getMonthWater = async (userId, date) => {
     const getDay = entry.createdAt.getDate();
     const dailyNorma = entry.dailyNorma || 2;
     const totalAmount = entry.totalAmount || 0;
+    const amountOfWater = entry.amountOfWater || 0;
 
 
     return {
       date: `${months[getMonth]}, ${getDay}`,
       dailyNorma,
+      amountOfWater,
       percentage: Math.floor((totalAmount / (dailyNorma * 1000)) * 100),
       recordsWater: entry.entries ? entry.entries.length : 0,
     };
