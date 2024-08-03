@@ -61,7 +61,7 @@ export const getWaterConsumptionByDate = async (userId, date) => {
   };
 };
 
-export const getMonthWater = async (userId, date, res) => {
+export const getMonthWater = async (userId, date) => {
   const [year, month] = date.split("-");
   const startDate = new Date(Date.UTC(year, month - 1, 1));
   const endDate = new Date(Date.UTC(year, month, 0));
@@ -109,5 +109,6 @@ if (waterMonth.length === 0) {
       recordsWater: entry.entries.length,
     };
   });
-  return res.json(result);
+
+  return result;
 };
