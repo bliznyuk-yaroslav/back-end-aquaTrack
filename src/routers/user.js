@@ -12,7 +12,6 @@ import { updateUserSchema } from '../validation/user.js';
 
 const router = Router();
 router.use(authenticate);
-// router.get('/', ctrlWrapper(current));
 router.get('/:id', isValid, ctrlWrapper(getUserByIdController));
 router.patch(
   '/:id',

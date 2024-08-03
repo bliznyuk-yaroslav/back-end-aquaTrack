@@ -1,0 +1,37 @@
+openapi: 3.1.0
+info:
+  version: 1.0.0
+  title: AquaTrack Web
+  license:
+    name: Apache 2.0
+    url: <http://www.apache.org/licenses/LICENSE-2.0.html>
+  description: >
+    This is the documentation for the application AquaTrack, here you can register and log in,
+    and keep track of how much water you drank per day, calculate the amount
+    of water you need per day, and also track how much water you drank.
+tags:
+  - name: AquaTrack
+    description: Operations with water.
+
+servers:
+  - url: https://nodejs-hw-mongodb-1-pgvt.onrender.com
+    description: Production server
+paths:
+  /contacts:
+    get:
+      $ref: ../swagger/paths/contacts/get.yaml
+    post:
+      $ref: ../swagger/paths/contacts/post.yaml
+  /contacts/{id}:
+    get:
+      $ref: ../swagger/paths/contacts\{id)/get.yaml
+    patch:
+      $ref: ../swagger/paths/contacts/{id)/patch.yaml
+    delete:
+      $ref: ../swagger/paths/contacts/{id)/delete.yaml
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
