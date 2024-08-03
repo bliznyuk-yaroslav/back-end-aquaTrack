@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { addWaterController, deleteWaterController, getWaterConsumptionController, patchWaterController } from "../controllers/water.js";
+import { addWaterController, deleteWaterController, getMonthWaterController, getWaterConsumptionController, patchWaterController } from "../controllers/water.js";
 import { ctrlWrapper } from "../utils/ctrlWrapper.js";
 import { validateBody } from "../middlewares/validateBody.js";
 import { addWaterSchema } from "../validation/water.js";
@@ -14,5 +14,7 @@ router.post('/', validateBody(addWaterSchema), ctrlWrapper(addWaterController));
 router.patch('/:waterId', ctrlWrapper(patchWaterController));
 router.delete('/:waterId', ctrlWrapper(deleteWaterController));
 router.get('/consumption', ctrlWrapper(getWaterConsumptionController));
+router.get('/month/:date', ctrlWrapper(getMonthWaterController));
+
 
 export default router;
