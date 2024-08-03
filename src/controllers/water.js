@@ -1,4 +1,4 @@
-import { addWater, deleteWater, getWaterConsumptionByDate, patchWater } from "../services/water.js";
+import { addWater, deleteWater, getMonthWater, getWaterConsumptionByDate, patchWater } from "../services/water.js";
 import createHttpError from "http-errors";
 
 export const addWaterController = async (req, res, next) => {
@@ -74,4 +74,24 @@ export const getWaterConsumptionController = async (req, res, next) => {
   }
 };
 
+export const getMonthWaterController = async (req, res, next) => {
+    try {
+    
+    const { _id: userId } = req.user;
+    const { date } = req.params;
 
+    if (!date) {
+    return res.status(400).json({message: "Date is required!"})
+    }
+    
+    const waterMonth = await getMonthWater(userId, date);
+
+    res.status(200).json({
+        status: 200,
+        message: 'Successfully found amount of water for this month!',
+        data: waterMonth
+    })
+    } catch (error) {
+        next(error);
+    }
+};
