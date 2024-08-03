@@ -110,6 +110,8 @@ export const getMonthWater = async (userId, date) => {
 
   return {
     totalMonthlyWater,
-    records: result,
+    // records: result,
   };
 };
+
+// рекордс - раптом треба вивести всі записи про додану воду за місяць
