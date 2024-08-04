@@ -33,15 +33,15 @@ properties:
     example: 'woman'
   weight:
     description: "User's weight"
-    type: Number
+    type: number
     example: 65
   activityTime:
     description: "User's activityTime"
-    type: Number
+    type: number
     example: 8
   dailyNorma:
     description: "User's dailyNorma"
-    type: Number
+    type: number
     example: 1.5
   avatar:
     description: "Link to user's photo"

@@ -1,0 +1,86 @@
+tags:
+  - User
+summary: Patch user by id
+operationId: patchUser
+description: 'Patch user by id'
+security:
+  - bearerAuth: []
+parameters:
+  - in: path
+    name: id
+    required: true
+    schema:
+      type: string
+      example: '65ca67e7ae7f10c88b598384'
+requestBody:
+  content:
+    multipart/form-data:
+      schema:
+        type: object
+        required: []
+        properties:
+          name:
+            description: 'User name'
+            type: string
+            example: 'Yaroslav Bliznyuk'
+          email:
+            description: 'Contact email'
+            type: string
+            example: 'bliznyuk.yaroslav@gmail.com'
+          password:
+            description: 'User password'
+            type: string
+            example: yaroslav1999
+          gender:
+            description: 'User ender'
+            type: string
+            enum: ['man', 'woman']
+            example: 'man'
+          weigth:
+            description: 'User weigth'
+            type: number
+            example: 70
+          activityTime:
+            description: 'User activity time'
+            type: number
+            example: 8
+          dailyNorma:
+            description: 'User daily norma water'
+            type: number
+            example: 1.5
+          avatar:
+            description: 'User avatar'
+            type: string
+            example: 'https://res.cloudinary.com/dxajyixgo/image/upload/v1721212524/kd9fbbmmnvvh2r0zl6xy.jpg'
+            format: binary
+responses:
+  '200':
+    description: 'OK'
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 200
+            message:
+              type: string
+              example: 'Successful user change'
+            data:
+              type: object
+              $ref: ..\..\..\components\schemas\user.yaml
+  '400':
+    $ref: '../../../components/responses/400.yaml'
+  '401':
+    $ref: '../../../components/responses/401.yaml'
+  '404':
+    $ref: '../../../components/responses/404.yaml'
+  '422':
+    $ref: '../../../components/responses/422.yaml'
+  '500':
+    $ref: '../../../components/responses/500.yaml'
