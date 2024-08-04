@@ -17,18 +17,11 @@ servers:
   - url: https://nodejs-hw-mongodb-1-pgvt.onrender.com
     description: Production server
 paths:
-  /contacts:
+  /user/{id}:
     get:
-      $ref: ../swagger/paths/contacts/get.yaml
-    post:
-      $ref: ../swagger/paths/contacts/post.yaml
-  /contacts/{id}:
-    get:
-      $ref: ../swagger/paths/contacts\{id)/get.yaml
+      $ref: ..\swagger\paths\user\{id}\get.yaml
     patch:
-      $ref: ../swagger/paths/contacts/{id)/patch.yaml
-    delete:
-      $ref: ../swagger/paths/contacts/{id)/delete.yaml
+      $ref: ..\swagger\paths\user\{id}\patch.yaml
 components:
   securitySchemes:
     bearerAuth:
