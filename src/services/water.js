@@ -62,7 +62,6 @@ export const getWaterConsumptionByDate = async (userId, date) => {
 };
 
 
-
 export const getMonthWater = async (userId, date) => {
   const [year, month] = date.split("-");
   const startDate = new Date(Date.UTC(year, month - 1, 1));
@@ -75,12 +74,72 @@ export const getMonthWater = async (userId, date) => {
       $lte: endDate
     }
   });
+  
+  const months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
 
   const totalMonthlyWater = waterMonth.reduce((sum, entry) => sum + (entry.amountOfWater || 0), 0);
 
-  return {
-totalMonthlyWater,
-  };
+  const result = waterMonth.map((entry) => {
+    const getMonth = entry.createdAt.getMonth();
+    const getDay = entry.createdAt.getDate();
+    const dailyNorma = entry.dailyNorma || 2;
+    const totalAmount = entry.totalAmount || 0;
+    const amountOfWater = entry.amountOfWater || 0;
 
+
+    return {
+      date: `${months[getMonth]}, ${getDay}`,
+      dailyNorma,
+      amountOfWater,
+      percentage: Math.floor((totalAmount / (dailyNorma * 1000)) * 100),
+      recordsWater: entry.entries ? entry.entries.length : 0,
+    };
+  });
+
+  return {
+    totalMonthlyWater,
+    records: result,
+  };
 };
+
+// рекордс - раптом треба вивести всі записи про додану воду за місяць
+
+
+
+
+
+
+// export const getMonthWater = async (userId, date) => {
+//   const [year, month] = date.split("-");
+//   const startDate = new Date(Date.UTC(year, month - 1, 1));
+//   const endDate = new Date(Date.UTC(year, month, 0, 23, 59, 59, 999));
+
+//   const waterMonth = await WaterCollection.find({
+//     userId: userId,
+//     createdAt: {
+//       $gte: startDate,
+//       $lte: endDate
+//     }
+//   });
+
+//   const totalMonthlyWater = waterMonth.reduce((sum, entry) => sum + (entry.amountOfWater || 0), 0);
+
+//   return {
+// totalMonthlyWater,
+//   };
+
+// };
 
