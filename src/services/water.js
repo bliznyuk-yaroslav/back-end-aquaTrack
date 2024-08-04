@@ -91,11 +91,14 @@ export const getMonthWater = async (userId, date) => {
   ];
 
   const totalMonthlyWater = waterMonth.reduce((sum, entry) => sum + (entry.amountOfWater || 0), 0);
+  const dailyWater = waterMonth.length > 0 ? waterMonth[0].dailyWater || 1.5 : 1.5;
+  const daysInMonth = new Date(year, month, 0).getDate();
+  const totalMonthlyNorma = dailyWater * 1000 * daysInMonth;
 
   const result = waterMonth.map((entry) => {
     const getMonth = entry.createdAt.getMonth();
     const getDay = entry.createdAt.getDate();
-    const dailyNorma = entry.dailyNorma || 2;
+    const dailyNorma = entry.dailyNorma || dailyWater;
     const totalAmount = entry.totalAmount || 0;
     const amountOfWater = entry.amountOfWater || 0;
 
@@ -104,16 +107,19 @@ export const getMonthWater = async (userId, date) => {
       date: `${months[getMonth]}, ${getDay}`,
       dailyNorma,
       amountOfWater,
-      percentage: Math.floor((totalAmount / (dailyNorma * 1000)) * 100),
-      recordsWater: entry.entries ? entry.entries.length : 0,
+      percentage: Math.floor((amountOfWater / (dailyWater * 1000)) * 100) + '%',
+      // recordsWater: entry.entries ? entry.entries.length : 0,
     };
   });
 
+  const monthlyPercentage = Math.floor((totalMonthlyWater / (dailyWater * 1000)) * 100);
+
   return {
-    totalMonthlyWater,
+    totalMonthlyWater: (totalMonthlyWater / 1000),
+    totalMonthlyWaterPercentage: `${monthlyPercentage}%`,
     records: result,
   };
-};
+}; 
 
 // рекордс - раптом треба вивести всі записи про додану воду за місяць
 
