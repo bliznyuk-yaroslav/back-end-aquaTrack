@@ -76,26 +76,26 @@ export const getWaterConsumptionController = async (req, res, next) => {
 
 export const getMonthWaterController = async (req, res, next) => {
     try {
-    
+
     const { _id: userId } = req.user;
       const { date } = req.params;
-      
+
       const [year, month] = date.split("-");
-        
+
       const monthNumber = parseInt(month, 10);
       const yearNumber = parseInt(year, 10);
-        
+
       if (isNaN(monthNumber) || isNaN(yearNumber) || monthNumber < 1 || monthNumber > 12) {
         return res.status(400).json({ message: "Invalid date format! Use firstly year, then month" });
   }
 
       const waterMonth = await getMonthWater(userId, `${yearNumber}-${monthNumber}`);
-      
-    res.status(200).json({
+
+      res.status(200).json({
         status: 200,
         message: 'Successfully found amount of water for this month!',
         data: waterMonth
-    })
+      });
     } catch (error) {
         next(error);
     }
