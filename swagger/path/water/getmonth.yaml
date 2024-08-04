@@ -1,0 +1,50 @@
+tags:
+  - Water
+summary: Get the volume of water per month
+operationId: getMonthWater
+description: 'Get the volume of water per month'
+security:
+  - bearerAuth: []
+parameters:
+  - in: query
+    name: date
+    schema:
+      type: string
+      format: date
+    example: '2024-08'
+responses:
+  '200':
+    description: Successfully found information about water!
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 200
+            message:
+              type: string
+              example: Successfully found information about water!
+            data:
+              type: object
+              required:
+                - date
+                - waterId
+              properties:
+                date:
+                  type: string
+                  format: date
+                  example: '2024-08'
+                waterId:
+                  type: string
+                  example: '65ca67e7ae7f10c88b598384'
+
+  '401':
+    $ref: '../../components/responses/401.yaml'
+  '404':
+    $ref: '../../components/responses/404.yaml'

@@ -1,0 +1,48 @@
+tags:
+  - Water
+summary: Add water
+operationId: addWater
+description: 'Adding water'
+security:
+  - bearerAuth: []
+requestBody:
+  content:
+    multipart/form-data:
+      schema:
+        type: object
+        required:
+          - amountOfWater
+          - time
+        properties:
+          amountOfWater:
+            description: 'Amount of water'
+            type: number
+            example: 50
+          time:
+            description: 'Time when water was added'
+            type: string
+            example: '12:15'
+
+responses:
+  '201':
+    description: Water is added
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 201
+            message:
+              type: string
+              example: Successfully added water!
+            data:
+              type: object
+              $ref: '../../components/schemas/water.yaml'
+  '401':
+    $ref: '../../components/responses/401.yaml'
