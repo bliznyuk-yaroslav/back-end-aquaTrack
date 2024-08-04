@@ -1,0 +1,13 @@
+type: object
+required:
+  - amountOfWater
+  - time
+properties:
+  amountOfWater:
+    description: 'Amount of water'
+    type: number
+    example: 50
+  time:
+    description: 'Time when you add water'
+    type: string
+    example: '12:15'
