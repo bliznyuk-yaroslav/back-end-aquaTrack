@@ -19,7 +19,7 @@ requestBody:
             type: number
             example: 50
           time:
-            description: 'Time when you add water'
+            description: 'Time when water was added'
             type: string
             example: '12:15'
 
