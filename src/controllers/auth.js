@@ -8,6 +8,7 @@ export const registerUserController = async (req, res, next) => {
       name: user.name,
       email: user.email,
       accessToken: user.accessToken,
+      userId: user._id, // додаємо userId
     };
     res.status(201).json({
       status: 201,
@@ -36,6 +37,7 @@ export const loginUserController = async (req, res) => {
     message: 'User successfully logged in!',
     data: {
       accessToken: session.accessToken,
+      userId: session.userId,  // додаємо userId
     },
   });
 };

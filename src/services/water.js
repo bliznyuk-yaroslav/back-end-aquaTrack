@@ -52,7 +52,7 @@ export const getWaterConsumptionByDate = async (userId, date) => {
 
   const totalAmount = waterData.reduce((total, record) => total + record.amountOfWater, 0);
   const dailyNorma = waterData[0].dailyNorma * 1000;
-  const percentageConsumed = ((totalAmount / dailyNorma) * 100).toFixed(2) + "%";
+  const percentageConsumed = ((totalAmount / dailyNorma) * 100).toFixed(0) + "%";
 
   return {
     waterData,
@@ -81,6 +81,6 @@ export const getMonthWater = async (userId, date) => {
   return {
 totalMonthlyWater,
   };
-  
+
 };
 

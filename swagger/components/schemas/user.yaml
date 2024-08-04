@@ -1,0 +1,49 @@
+type: object
+required:
+  - _id
+  - name
+  - email
+  - password
+  - gender
+  - weight
+  - activityTime
+  - dailyNorma
+  - avatar
+properties:
+  _id:
+    description: "User's id"
+    type: string
+    example: 66ab5e732a549b0ec4199ca1
+  name:
+    description: "User's name"
+    type: string
+    example: 'Yulia Shevchenko'
+  password:
+    description: "User's password"
+    type: string
+    example: '123456'
+  email:
+    description: "User's email"
+    type: string
+    example: 'test3@gmail.com'
+  gender:
+    description: "User's gender"
+    type: string
+    enum: ['woman', 'man']
+    example: 'woman'
+  weight:
+    description: "User's weight"
+    type: Number
+    example: 65
+  activityTime:
+    description: "User's activityTime"
+    type: Number
+    example: 8
+  dailyNorma:
+    description: "User's dailyNorma"
+    type: Number
+    example: 1.5
+  avatar:
+    description: "Link to user's photo"
+    type: string
+    example: 'https://res.cloudinary.com/dxajyixgo/image/upload/v1721212524/kd9fbbmmnvvh2r0zl6xy.jpg'
