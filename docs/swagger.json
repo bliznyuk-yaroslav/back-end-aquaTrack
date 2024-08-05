@@ -607,7 +607,7 @@
         }
       }
     },
-    "/water/day{date}": {
+    "/water/day/{date}": {
       "get": {
         "tags": [
           "Water"
@@ -685,7 +685,7 @@
         }
       }
     },
-    "/water/month{date}": {
+    "/water/month/{date}": {
       "get": {
         "tags": [
           "Water"
