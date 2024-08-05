@@ -25,6 +25,12 @@ export const getUserByIdController = async (req, res) => {
 // update User
 export const updateUserController = async (req, res) => {
   const { _id: userId } = req.user;
+  if (req.body.email) {
+    return res.status(400).json({
+      status: 400,
+      message: 'Email cannot be changed',
+    });
+  }
 
   const data = await updateUser(userId, req.body);
   if (!data) {

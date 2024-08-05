@@ -6,7 +6,7 @@ description: 'Get the volume of water per month'
 security:
   - bearerAuth: []
 parameters:
-  - in: query
+  - in: path
     name: date
     schema:
       type: string
@@ -45,6 +45,6 @@ responses:
                   example: '65ca67e7ae7f10c88b598384'
 
   '401':
-    $ref: '../../components/responses/401.yaml'
+    $ref: '../../../components/responses/401.yaml'
   '404':
-    $ref: '../../components/responses/404.yaml'
+    $ref: '../../../components/responses/404.yaml'
