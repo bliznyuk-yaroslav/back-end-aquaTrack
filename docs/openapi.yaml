@@ -14,7 +14,7 @@ tags:
     description: Operations with water.
 
 servers:
-  - url: https://nodejs-hw-mongodb-1-pgvt.onrender.com
+  - url: https://back-end-aquatrack.onrender.com/
     description: Production server
 paths:
   /auth/login:
@@ -29,6 +29,17 @@ paths:
   /auth/logout:
     post:
       $ref: '../swagger/paths/auth/post/logout.yaml'
+  /user/{id}:
+    get:
+      $ref: ..\swagger\paths\user\{id}\get.yaml
+    patch:
+      $ref: ..\swagger\paths\user\{id}\patch.yaml\
+  /water:
+    get:
+      $ref: ..\swagger\paths\water\getconsumption.yaml
+    get:
+      $ref: ..\swagger\paths\water\getmonth.yaml
+    patch:
   /user/{id}:
     get:
       $ref: ..\swagger\paths\user\{id}\get.yaml
