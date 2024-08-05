@@ -607,7 +607,7 @@
         }
       }
     },
-    "/water/day": {
+    "/water/day{date}": {
       "get": {
         "tags": [
           "Water"
@@ -622,8 +622,9 @@
         ],
         "parameters": [
           {
-            "in": "query",
+            "in": "path",
             "name": "date",
+            "required": true,
             "schema": {
               "type": "string",
               "format": "date"
@@ -684,7 +685,7 @@
         }
       }
     },
-    "/water/month": {
+    "/water/month{date}": {
       "get": {
         "tags": [
           "Water"
@@ -699,7 +700,7 @@
         ],
         "parameters": [
           {
-            "in": "query",
+            "in": "path",
             "name": "date",
             "schema": {
               "type": "string",
