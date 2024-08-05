@@ -1,0 +1,76 @@
+tags:
+  - User
+summary: Register user
+operationId: registerUser
+description: 'Register user'
+security:
+  - bearerAuth: []
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - email
+          - password
+        properties:
+          email:
+            description: "User's email"
+            type: string
+            example: 'test3@gmail.com'
+          password:
+            description: "User's password"
+            type: string
+            example: '123456'
+responses:
+  '201':
+    description: User successfully registered
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 201
+            message:
+              type: string
+              example: User successfully registered
+            data:
+              type: object
+              properties:
+                accessToken:
+                  type: string
+                  example: 'your_access_token'
+                userId:
+                  type: string
+                  example: '66ab5e732a549b0ec4199ca1'
+                email:
+                  type: string
+                  example: 'test3@gmail.com'
+                name:
+                  type: string
+                  example: 'Yulia Shevchenko'
+                gender:
+                  type: string
+                  enum: ['woman', 'man']
+                  example: 'woman'
+                weight:
+                  type: number
+                  example: 65
+                activityTime:
+                  type: number
+                  example: 8
+                dailyNorma:
+                  type: number
+                  example: 1.5
+                avatar:
+                  type: string
+                  example: 'https://res.cloudinary.com/dxajyixgo/image/upload/v1721212524/kd9fbbmmnvvh2r0zl6xy.jpg'
+  '409':
+    $ref: '../../../components/responses/409.yaml'
