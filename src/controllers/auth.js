@@ -37,7 +37,7 @@ export const loginUserController = async (req, res) => {
     message: 'User successfully logged in!',
     data: {
       accessToken: session.accessToken,
-      userId: session.userId,  // додаємо userId
+      userId: session.userId,
     },
   });
 };
@@ -55,10 +55,14 @@ export const logoutUserController = async (req, res) => {
 const setupSession = (res, session) => {
   res.cookie('refreshToken', session.refreshToken, {
     httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'strict',
     expires: new Date(Date.now() + REFRESH_TOKEN_LIFETIME),
   });
   res.cookie('sessionId', session._id, {
     httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'strict',
     expires: new Date(Date.now() + REFRESH_TOKEN_LIFETIME),
   });
 };

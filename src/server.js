@@ -19,7 +19,10 @@ export const setupServer = () => {
       },
     }),
   );
-  app.use(cors());
+  app.use(cors({
+    origin: 'https://back-end-aquatrack.onrender.com/',
+    credentials: true,
+  }));
   app.use(express.json());
   app.use(cookieParser());
   app.use('/uploads', express.static(UPLOAD_DIR));
