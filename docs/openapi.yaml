@@ -14,7 +14,7 @@ tags:
     description: Operations with water.
 
 servers:
-  - url: https://back-end-aquatrack.onrender.com/
+  - url: https://back-end-aquatrack.onrender.com
     description: Production server
 paths:
   /auth/login:
@@ -36,17 +36,21 @@ paths:
       $ref: ..\swagger\paths\user\patch.yaml
     post:
       $ref: ..\swagger\paths\user\post.yaml
-  /water:
+  /water/getconsumption:
     get:
       $ref: ..\swagger\paths\water\getconsumption.yaml
+  /water/getmonth:
     get:
       $ref: ..\swagger\paths\water\getmonth.yaml
+  /water/{id}:
     patch:
-      $ref: ..\swagger\paths\water\patch.yaml
+      $ref: ..\swagger\paths\water\{id}\patch.yaml
+    delete:
+      $ref: ..\swagger\paths\water\{id}\delete.yaml
+  /water:
     post:
       $ref: ..\swagger\paths\water\post.yaml
-    delete:
-      $ref: ..\swagger\paths\water\delete.yaml
+
 components:
   securitySchemes:
     bearerAuth:

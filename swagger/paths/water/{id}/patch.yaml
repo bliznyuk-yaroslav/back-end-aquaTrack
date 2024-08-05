@@ -7,7 +7,7 @@ security:
   - bearerAuth: []
 parameters:
   - in: path
-    name: waterId
+    name: id
     required: true
     schema:
       type: string
@@ -43,7 +43,7 @@ responses:
               example: 200
             message:
               type: string
-              example: Successfully patched water!
+              example: 'Successfully patched water!'
             data:
               type: object
               properties:
@@ -61,13 +61,9 @@ responses:
                   format: date
                   example: '2024-08-02'
   '401':
-    $ref: '../../../components/responses/401.yaml'
+    $ref: ..\..\..\components\responses\401.yaml
   '404':
-    $ref: '../../../components/responses/404.yaml'
-
-
-
-
+    $ref: ..\..\..\components\responses\404.yaml
 # tags:
 #   - Water
 # summary: Patch water

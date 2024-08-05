@@ -7,7 +7,7 @@ security:
   - bearerAuth: []
 parameters:
   - in: path
-    name: waterId
+    name: id
     required: true
     schema:
       type: string
@@ -26,6 +26,6 @@ responses:
               type: integer
               example: 204
   '401':
-    $ref: '../../../components/responses/401.yaml'
+    $ref: ..\..\..\components\responses\400.yaml
   '404':
-    $ref: '../../../components/responses/404.yaml'
+    $ref: ..\..\..\components\responses\404.yaml

@@ -66,14 +66,14 @@ responses:
               example: 'Successful user change'
             data:
               type: object
-              $ref: ..\..\..\components\schemas\user.yaml
+              $ref: ..\..\components\schemas\user.yaml
   '400':
-    $ref: '../../../components/responses/400.yaml'
+    $ref: '../../components/responses/400.yaml'
   '401':
-    $ref: '../../../components/responses/401.yaml'
+    $ref: '../../components/responses/401.yaml'
   '404':
-    $ref: '../../../components/responses/404.yaml'
+    $ref: '../../components/responses/404.yaml'
   '422':
-    $ref: '../../../components/responses/422.yaml'
+    $ref: '../../components/responses/422.yaml'
   '500':
-    $ref: '../../../components/responses/500.yaml'
+    $ref: '../../components/responses/500.yaml'
