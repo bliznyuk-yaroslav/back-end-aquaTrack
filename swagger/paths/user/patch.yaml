@@ -1,17 +1,10 @@
 tags:
   - User
-summary: Patch user by id
+summary: Patch user
 operationId: patchUser
-description: 'Patch user by id'
+description: 'Patch authenticated user'
 security:
   - bearerAuth: []
-parameters:
-  - in: path
-    name: id
-    required: true
-    schema:
-      type: string
-      example: '65ca67e7ae7f10c88b598384'
 requestBody:
   content:
     multipart/form-data:
@@ -30,14 +23,14 @@ requestBody:
           password:
             description: 'User password'
             type: string
-            example: yaroslav1999
+            example: 'yaroslav1999'
           gender:
-            description: 'User ender'
+            description: 'User gender'
             type: string
             enum: ['man', 'woman']
             example: 'man'
-          weigth:
-            description: 'User weigth'
+          weight:
+            description: 'User weight'
             type: number
             example: 70
           activityTime:
@@ -51,8 +44,8 @@ requestBody:
           avatar:
             description: 'User avatar'
             type: string
-            example: 'https://res.cloudinary.com/dxajyixgo/image/upload/v1721212524/kd9fbbmmnvvh2r0zl6xy.jpg'
             format: binary
+            example: 'https://res.cloudinary.com/dxajyixgo/image/upload/v1721212524/kd9fbbmmnvvh2r0zl6xy.jpg'
 responses:
   '200':
     description: 'OK'

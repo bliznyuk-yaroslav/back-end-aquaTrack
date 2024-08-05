@@ -29,11 +29,13 @@ paths:
   /auth/logout:
     post:
       $ref: '../swagger/paths/auth/post/logout.yaml'
-  /user/{id}:
+  /user:
     get:
-      $ref: ..\swagger\paths\user\{id}\get.yaml
+      $ref: ..\swagger\paths\user\get.yaml
     patch:
-      $ref: ..\swagger\paths\user\{id}\patch.yaml\
+      $ref: ..\swagger\paths\user\patch.yaml
+    post:
+      $ref: ..\swagger\paths\user\post.yaml
   /water:
     get:
       $ref: ..\swagger\paths\water\getconsumption.yaml
