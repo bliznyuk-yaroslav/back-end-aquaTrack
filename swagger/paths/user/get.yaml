@@ -1,13 +1,13 @@
 tags:
   - User
-summary: Get User by id
+summary: Obtaining information about the user
 operationId: getUserById
-description: 'Get user by id'
+description: 'Get user'
 security:
-- bearerAuth: []
+  - bearerAuth: []
 responses:
   '200':
-    description: 'Get User by id'
+    description: 'Get User'
     content:
       application/json:
         schema:

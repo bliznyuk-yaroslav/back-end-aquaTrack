@@ -1,6 +1,6 @@
 tags:
   - User
-summary: Patch user
+summary: Updating user parameters
 operationId: patchUser
 description: 'Patch authenticated user'
 security:

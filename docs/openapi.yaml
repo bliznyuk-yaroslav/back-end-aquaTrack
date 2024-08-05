@@ -4,18 +4,23 @@ info:
   title: AquaTrack Web
   license:
     name: Apache 2.0
-    url: <http://www.apache.org/licenses/LICENSE-2.0.html>
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
   description: >
-    This is the documentation for the application AquaTrack, here you can register and log in,
-    and keep track of how much water you drank per day, calculate the amount
-    of water you need per day, and also track how much water you drank.
+    This is the documentation for the AquaTrack application.
+    You can register, log in, track daily water consumption,
+    calculate daily water needs, and view your water intake history.
 tags:
-  - name: AquaTrack
-    description: Operations with water.
+  - name: Authentication
+    description: Operations related to user authentication.
+  - name: User
+    description: Operations related to user information.
+  - name: Water
+    description: Operations related to water consumption tracking.
 
 servers:
   - url: https://back-end-aquatrack.onrender.com
     description: Production server
+
 paths:
   /auth/login:
     post:
@@ -31,25 +36,25 @@ paths:
       $ref: '../swagger/paths/auth/post/logout.yaml'
   /user:
     get:
-      $ref: ..\swagger\paths\user\get.yaml
+      $ref: '../swagger/paths/user/get.yaml'
     patch:
-      $ref: ..\swagger\paths\user\patch.yaml
+      $ref: '../swagger/paths/user/patch.yaml'
     post:
-      $ref: ..\swagger\paths\user\post.yaml
+      $ref: '../swagger/paths/user/post.yaml'
   /water/getconsumption:
     get:
-      $ref: ..\swagger\paths\water\getconsumption.yaml
+      $ref: '../swagger/paths/water/getconsumption.yaml'
   /water/getmonth:
     get:
-      $ref: ..\swagger\paths\water\getmonth.yaml
+      $ref: '../swagger/paths/water/getmonth.yaml'
   /water/{id}:
     patch:
-      $ref: ..\swagger\paths\water\{id}\patch.yaml
+      $ref: '../swagger/paths/water/{id}/patch.yaml'
     delete:
-      $ref: ..\swagger\paths\water\{id}\delete.yaml
+      $ref: '../swagger/paths/water/{id}/delete.yaml'
   /water:
     post:
-      $ref: ..\swagger\paths\water\post.yaml
+      $ref: '../swagger/paths/water/post.yaml'
 
 components:
   securitySchemes:
