@@ -52,7 +52,7 @@ export const deleteWaterController = async (req, res, next) => {
 export const getWaterConsumptionController = async (req, res, next) => {
   try {
     const { _id: userId } = req.user;
-    const { date } = req.query; // Date should be passed as a query parameter
+    const { date } = req.params; // Date should be passed as a query parameter
 
     if (!date) {
       return next(createHttpError(400, 'Date query parameter is required'));
