@@ -1,0 +1,54 @@
+tags:
+  - User
+summary: Add user avatar
+operationId: addUserAvatar
+description: 'Add user avatar for authenticated user'
+security:
+  - bearerAuth: []
+requestBody:
+  content:
+    multipart/form-data:
+      schema:
+        type: object
+        required:
+          - avatar
+        properties:
+          avatar:
+            description: 'User avatar'
+            type: string
+            format: binary
+            example: 'https://res.cloudinary.com/do0wlj9zc/image/upload/v1722859993/avatar/oitqgedkh7wkk3dlv1jk.jpg'
+responses:
+  '200':
+    description: 'OK'
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 200
+            message:
+              type: string
+              example: 'Avatar successfully added'
+            data:
+              type: object
+              properties:
+                avatarUrl:
+                  type: string
+                  example: 'https://res.cloudinary.com/do0wlj9zc/image/upload/v1722859993/avatar/oitqgedkh7wkk3dlv1jk.jpg'
+  '400':
+    $ref: '../../../components/responses/400.yaml'
+  '401':
+    $ref: '../../../components/responses/401.yaml'
+  '404':
+    $ref: '../../../components/responses/404.yaml'
+  '422':
+    $ref: '../../../components/responses/422.yaml'
+  '500':
+    $ref: '../../../components/responses/500.yaml'
