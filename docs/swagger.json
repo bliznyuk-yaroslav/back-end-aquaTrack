@@ -607,7 +607,7 @@
         }
       }
     },
-    "/water/getconsumption": {
+    "/water/day": {
       "get": {
         "tags": [
           "Water"
@@ -684,7 +684,7 @@
         }
       }
     },
-    "/water/getmonth": {
+    "/water/month": {
       "get": {
         "tags": [
           "Water"
