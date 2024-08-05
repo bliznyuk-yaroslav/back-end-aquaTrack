@@ -41,10 +41,10 @@ paths:
       $ref: '../swagger/paths/user/patch.yaml'
     post:
       $ref: '../swagger/paths/user/post.yaml'
-  /water/getconsumption:
+  /water/day:
     get:
       $ref: '../swagger/paths/water/getconsumption.yaml'
-  /water/getmonth:
+  /water/month:
     get:
       $ref: '../swagger/paths/water/getmonth.yaml'
   /water/{id}:
