@@ -41,11 +41,6 @@ requestBody:
             description: 'User daily norma water'
             type: number
             example: 1.5
-          avatar:
-            description: 'User avatar'
-            type: string
-            format: binary
-            example: 'https://res.cloudinary.com/dxajyixgo/image/upload/v1721212524/kd9fbbmmnvvh2r0zl6xy.jpg'
 responses:
   '200':
     description: 'OK'
