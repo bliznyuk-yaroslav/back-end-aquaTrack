@@ -43,12 +43,12 @@ responses:
                   type: string
                   example: 'https://res.cloudinary.com/do0wlj9zc/image/upload/v1722859993/avatar/oitqgedkh7wkk3dlv1jk.jpg'
   '400':
-    $ref: '../../../components/responses/400.yaml'
+    $ref: '../../components/responses/400.yaml'
   '401':
-    $ref: '../../../components/responses/401.yaml'
+    $ref: '../../components/responses/401.yaml'
   '404':
-    $ref: '../../../components/responses/404.yaml'
+    $ref: '../../components/responses/404.yaml'
   '422':
-    $ref: '../../../components/responses/422.yaml'
+    $ref: '../../components/responses/422.yaml'
   '500':
-    $ref: '../../../components/responses/500.yaml'
+    $ref: '../../components/responses/500.yaml'

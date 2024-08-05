@@ -4,14 +4,7 @@ summary: Get User by id
 operationId: getUserById
 description: 'Get user by id'
 security:
-  - bearerAuth: []
-parameters:
-  - in: path
-    name: id
-    required: true
-    schema:
-      type: string
-      example: '65ca67e7ae7f10c88b598384'
+- bearerAuth: []
 responses:
   '200':
     description: 'Get User by id'
@@ -29,13 +22,13 @@ responses:
               example: 200
             message:
               type: string
-              example: Successfully found user with id 65ca67e7ae7f10c88b598384!
+              example: Successfully found user with!
             data:
               type: object
-              $ref: ..\..\..\components\schemas\user.yaml
+              $ref: ..\..\components\schemas\user.yaml
   '401':
-    $ref: '../../../components/responses/401.yaml'
+    $ref: ..\..\components\responses\401.yaml
   '404':
-    $ref: '../../../components/responses/404.yaml'
+    $ref: ..\..\components\responses\404.yaml
   '500':
-    $ref: '../../../components/responses/500.yaml'
+    $ref: ..\..\components\responses\500.yaml
