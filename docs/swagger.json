@@ -5,9 +5,9 @@
     "title": "AquaTrack Web",
     "license": {
       "name": "Apache 2.0",
-      "url": "<http://www.apache.org/licenses/LICENSE-2.0.html>"
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "description": "This is the documentation for the application AquaTrack, here you can register and log in, and keep track of how much water you drank per day, calculate the amount of water you need per day, and also track how much water you drank.\n"
+    "description": "This is the documentation for the AquaTrack application. You can register, log in, track daily water consumption, calculate daily water needs, and view your water intake history.\n"
   },
   "servers": [
     {
@@ -17,8 +17,16 @@
   ],
   "tags": [
     {
-      "name": "AquaTrack",
-      "description": "Operations with water."
+      "name": "Authentication",
+      "description": "Operations related to user authentication."
+    },
+    {
+      "name": "User",
+      "description": "Operations related to user information."
+    },
+    {
+      "name": "Water",
+      "description": "Operations related to water consumption tracking."
     }
   ],
   "paths": {
@@ -355,9 +363,9 @@
         "tags": [
           "User"
         ],
-        "summary": "Get User by id",
+        "summary": "Obtaining information about the user",
         "operationId": "getUserById",
-        "description": "Get user by id",
+        "description": "Get user",
         "security": [
           {
             "bearerAuth": []
@@ -365,7 +373,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Get User by id",
+            "description": "Get User",
             "content": {
               "application/json": {
                 "schema": {
@@ -408,7 +416,7 @@
         "tags": [
           "User"
         ],
-        "summary": "Patch user",
+        "summary": "Updating user parameters",
         "operationId": "patchUser",
         "description": "Patch authenticated user",
         "security": [
@@ -461,12 +469,6 @@
                     "description": "User daily norma water",
                     "type": "number",
                     "example": 1.5
-                  },
-                  "avatar": {
-                    "description": "User avatar",
-                    "type": "string",
-                    "format": "binary",
-                    "example": "https://res.cloudinary.com/dxajyixgo/image/upload/v1721212524/kd9fbbmmnvvh2r0zl6xy.jpg"
                   }
                 }
               }
