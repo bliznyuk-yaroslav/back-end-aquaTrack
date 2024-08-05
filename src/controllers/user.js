@@ -6,8 +6,8 @@ import { env } from '../utils/env.js';
 import { updateAvatar } from '../services/user.js';
 import { updateUser } from '../services/user.js';
 export const getUserByIdController = async (req, res) => {
-  const { id } = req.user;
-  const user = await getUserById(id);
+  const { _id: userId } = req.user;
+  const user = await getUserById(userId);
   if (!user) {
     return res.status(404).json({
       status: 404,
@@ -17,16 +17,16 @@ export const getUserByIdController = async (req, res) => {
   }
   res.status(200).json({
     status: 200,
-    message: `Successfully found user with id ${id}!`,
+    message: `Successfully found user with!`,
     data: user,
   });
 };
 
 // update User
 export const updateUserController = async (req, res) => {
-  const { id } = req.user;
+  const { _id: userId } = req.user;
 
-  const data = await updateUser(id, req.body);
+  const data = await updateUser(userId, req.body);
   if (!data) {
     throw createHttpError(404, 'There is no such user, unfortunately');
   }
@@ -37,7 +37,7 @@ export const updateUserController = async (req, res) => {
   });
 };
 export const updateAvatarController = async (req, res) => {
-  const { id } = req.user;
+  const { _id: userId } = req.user;
   const avatar = req.file;
   let avatarUrl;
   if (avatar) {
@@ -48,7 +48,7 @@ export const updateAvatarController = async (req, res) => {
     }
   }
 
-  const data = await updateAvatar(id, {
+  const data = await updateAvatar(userId, {
     avatar: avatarUrl,
   });
   if (!data) {
