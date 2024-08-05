@@ -29,6 +29,22 @@ paths:
   /auth/logout:
     post:
       $ref: '../swagger/paths/auth/post/logout.yaml'
+  /user/{id}:
+    get:
+      $ref: ..\swagger\paths\user\{id}\get.yaml
+    patch:
+      $ref: ..\swagger\paths\user\{id}\patch.yaml\
+  /water:
+    get:
+      $ref: ..\swagger\paths\water\getconsumption.yaml
+    get:
+      $ref: ..\swagger\paths\water\getmonth.yaml
+    patch:
+      $ref: ..\swagger\paths\water\patch.yaml
+    post:
+      $ref: ..\swagger\paths\water\post.yaml
+    delete:
+      $ref: ..\swagger\paths\water\delete.yaml
 components:
   securitySchemes:
     bearerAuth:
