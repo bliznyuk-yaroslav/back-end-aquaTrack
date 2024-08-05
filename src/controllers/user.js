@@ -1,4 +1,3 @@
-
 import createHttpError from 'http-errors';
 import { getUserById } from '../services/user.js';
 import { saveFileToUploadDir } from '../utils/saveFileToUploadDir.js';
@@ -6,8 +5,7 @@ import { saveFileToCloudinary } from '../utils/saveFileToCloudinary.js';
 import { env } from '../utils/env.js';
 import { updateAvatar } from '../services/user.js';
 import { updateUser } from '../services/user.js';
-;
-export const getUserByIdController = async (req, res, next) => {
+export const getUserByIdController = async (req, res) => {
   const { id } = req.user;
   const user = await getUserById(id);
   if (!user) {
@@ -25,9 +23,9 @@ export const getUserByIdController = async (req, res, next) => {
 };
 
 // update User
-export const updateUserController = async (req, res, next) => {
+export const updateUserController = async (req, res) => {
   const { id } = req.user;
-  
+
   const data = await updateUser(id, req.body);
   if (!data) {
     throw createHttpError(404, 'There is no such user, unfortunately');
@@ -38,27 +36,27 @@ export const updateUserController = async (req, res, next) => {
     data: data.user,
   });
 };
-export const updateAvatarController = async(req, res)=>{
-  const {id} = req.user;
+export const updateAvatarController = async (req, res) => {
+  const { id } = req.user;
   const avatar = req.file;
   let avatarUrl;
   if (avatar) {
     if (env('ENABLE_CLOUDINARY') === 'true') {
-      avatarUrl = await saveFileToCloudinary(avatar,'avatar');
+      avatarUrl = await saveFileToCloudinary(avatar, 'avatar');
     } else {
       avatarUrl = await saveFileToUploadDir(avatar);
     }
   }
 
-const data = await updateAvatar(id,{
-   avatar:avatarUrl,
-});
-if(!data){
-  throw createHttpError(404, 'There is no such user, unfortunately')
+  const data = await updateAvatar(id, {
+    avatar: avatarUrl,
+  });
+  if (!data) {
+    throw createHttpError(404, 'There is no such user, unfortunately');
+  }
+  res.status(200).json({
+    status: 200,
+    message: 'Avatar successfully added',
+    data: data.user,
+  });
 };
-res.status(200).json({
-  status:200,
-  message:"Avatar successfully added",
-  data:data.user,
-})
-}
