@@ -9,6 +9,7 @@ required:
   - activityTime
   - dailyNorma
   - avatar
+  - accessToken
 properties:
   _id:
     description: "User's id"
@@ -47,3 +48,9 @@ properties:
     description: "Link to user's photo"
     type: string
     example: 'https://res.cloudinary.com/dxajyixgo/image/upload/v1721212524/kd9fbbmmnvvh2r0zl6xy.jpg'
+  accessToken:
+    description: "User's access token"
+    type: string
+  userId:
+    description: "User's id"
+    type: string
