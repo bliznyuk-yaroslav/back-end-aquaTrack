@@ -17,6 +17,18 @@ servers:
   - url: https://back-end-aquatrack.onrender.com/
     description: Production server
 paths:
+  /auth/login:
+    post:
+      $ref: '../swagger/paths/auth/post/login.yaml'
+  /auth/register:
+    post:
+      $ref: '../swagger/paths/auth/post/register.yaml'
+  /auth/refresh:
+    post:
+      $ref: '../swagger/paths/auth/post/refresh.yaml'
+  /auth/logout:
+    post:
+      $ref: '../swagger/paths/auth/post/logout.yaml'
   /user/{id}:
     get:
       $ref: ..\swagger\paths\user\{id}\get.yaml
