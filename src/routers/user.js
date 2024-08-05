@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { authenticate } from '../middlewares/authenticate.js';
 import {
   getUserByIdController,
+  updateAvatarController,
   updateUserController,
 } from '../controllers/user.js';
 import { ctrlWrapper } from '../utils/ctrlWrapper.js';
@@ -12,11 +13,11 @@ import { updateUserSchema } from '../validation/user.js';
 
 const router = Router();
 router.use(authenticate);
-router.get('/:id', isValid, ctrlWrapper(getUserByIdController));
+router.get('/', isValid, ctrlWrapper(getUserByIdController));
 router.patch(
-  '/:id',
-  upload.single('avatar'),
+  '/update',
   validateBody(updateUserSchema),
   ctrlWrapper(updateUserController),
 );
+router.post('/avatar', upload.single('avatar'), ctrlWrapper(updateAvatarController))
 export default router;
