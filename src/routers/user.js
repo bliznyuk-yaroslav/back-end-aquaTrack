@@ -19,5 +19,9 @@ router.patch(
   validateBody(updateUserSchema),
   ctrlWrapper(updateUserController),
 );
-router.post('/avatar', upload.single('avatar'), ctrlWrapper(updateAvatarController))
+router.post(
+  '/avatar',
+  upload.single('avatar'),
+  ctrlWrapper(updateAvatarController),
+);
 export default router;
