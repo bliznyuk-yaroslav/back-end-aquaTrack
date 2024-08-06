@@ -16,7 +16,7 @@ const errorHandler = (error, req, res, next) => {
   });
   next();
 };
-export default errorHandler;
+// export default errorHandler;
 
 
 // Для виведення конкретного повідомлення з помилкою
