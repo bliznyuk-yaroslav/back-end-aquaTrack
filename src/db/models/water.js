@@ -20,13 +20,6 @@ const waterSchema = new Schema(
             type: Number,
             default: 1.5,
         },
-        totalAmount: {
-            type: Number,
-            default: 0,
-        },
-        monthWater: {
-            type: Number,
-        },
         userId: {
             type: Schema.Types.ObjectId,
             ref: 'users',
