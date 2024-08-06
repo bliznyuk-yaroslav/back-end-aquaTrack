@@ -4,6 +4,6 @@ export const updateUserSchema = Joi.object({
   name: Joi.string(),
   gender: Joi.string().valid('woman', 'man'),
   weight: Joi.number(),
-  timeActivity: Joi.string(),
+  activityTime: Joi.number(),
   dailyNorma: Joi.number().min(1).max(50000),
 });
