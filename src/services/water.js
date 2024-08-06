@@ -1,7 +1,11 @@
 import { WaterCollection } from "../db/models/water.js";
 
 export const addWater = async (payload) => {
-    const water = await WaterCollection.create(payload);
+  const createdAt = payload.date ? new Date(payload.date) : new Date();
+
+  const newPayload = { ...payload, createdAt };
+
+    const water = await WaterCollection.create(newPayload);
     return water;
 };
 
