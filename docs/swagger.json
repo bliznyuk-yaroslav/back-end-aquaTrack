@@ -888,26 +888,10 @@
         ],
         "responses": {
           "204": {
-            "description": "Delete water",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "required": [
-                    "status"
-                  ],
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "example": 204
-                    }
-                  }
-                }
-              }
-            }
+            "description": "Delete water"
           },
           "401": {
-            "$ref": "#/components/responses/400"
+            "$ref": "#/components/responses/401"
           },
           "404": {
             "$ref": "#/components/responses/404"
