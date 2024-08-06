@@ -37,8 +37,10 @@ paths:
   /user:
     get:
       $ref: '../swagger/paths/user/get.yaml'
+  /user/update:
     patch:
       $ref: '../swagger/paths/user/patch.yaml'
+  /user/avatar:
     post:
       $ref: '../swagger/paths/user/post.yaml'
   /water/day/{date}:

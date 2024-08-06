@@ -411,7 +411,9 @@
             "$ref": "#/components/responses/500"
           }
         }
-      },
+      }
+    },
+    "/user/update": {
       "patch": {
         "tags": [
           "User"
@@ -521,7 +523,9 @@
             "$ref": "#/components/responses/500"
           }
         }
-      },
+      }
+    },
+    "/user/avatar": {
       "post": {
         "tags": [
           "User"
