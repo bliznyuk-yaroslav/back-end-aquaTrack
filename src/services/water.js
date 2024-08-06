@@ -67,13 +67,51 @@ export const getMonthWater = async (userId, date) => {
   const startDate = new Date(Date.UTC(year, month - 1, 1));
   const endDate = new Date(Date.UTC(year, month, 0, 23, 59, 59, 999));
 
-  const waterMonth = await WaterCollection.find({
+  const waterMonth = await WaterCollection.aggregate([
+    {
+      $match: {
     userId: userId,
     createdAt: {
       $gte: startDate,
       $lte: endDate
+      }
     }
-  });
+    },
+    
+    {
+      $group: {
+        _id: {
+          year: { $year: "$createdAt"},
+          month: { $month: "$createdAt"},
+          day: { $dayOfMonth: "$createdAt"}
+        },
+        totalAmountOfWater: { $sum: "$amountOfWater" }, 
+        dailyNorma: { $avg: "$dailyNorma" }
+      }
+    },
+    {
+      $addFields: {
+        date: {
+          $dateFromParts: {
+            year: "$_id.year",
+            month: "$_id.month",
+            day: "$_id.day"
+          }
+        }
+      }
+    },
+    {
+      $project: {
+        _id: 0,
+        date: 1,
+        totalAmountOfWater: 1,
+        dailyNorma: 1
+      }
+    },
+    {
+      $sort: { date: 1 }
+    }
+  ]);
   
   const months = [
     "January",
@@ -96,11 +134,12 @@ export const getMonthWater = async (userId, date) => {
   const totalMonthlyNorma = dailyWater * 1000 * daysInMonth;
 
   const result = waterMonth.map((entry) => {
-    const getMonth = entry.createdAt.getMonth();
-    const getDay = entry.createdAt.getDate();
+    const date = new Date(entry.date);
+    const getMonth = date.getUTCMonth();
+    const getDay = date.getUTCDate(); 
     const dailyNorma = entry.dailyNorma || dailyWater;
     const totalAmount = entry.totalAmount || 0;
-    const amountOfWater = entry.amountOfWater || 0;
+    const amountOfWater = entry.totalAmountOfWater || 0;
 
 
     return {
@@ -112,7 +151,7 @@ export const getMonthWater = async (userId, date) => {
     };
   });
 
-  const monthlyPercentage = Math.floor((totalMonthlyWater / (dailyWater * 1000)) * 100);
+  const monthlyPercentage = Math.floor((totalMonthlyWater / totalMonthlyNorma) * 100);
 
   return {
     totalMonthlyWater: (totalMonthlyWater / 1000),
