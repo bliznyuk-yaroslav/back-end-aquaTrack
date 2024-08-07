@@ -8,20 +8,33 @@ import {
   REFRESH_TOKEN_LIFETIME,
 } from '../constant/index.js';
 
+const createSession = (userId) => {
+  const accessToken = randomBytes(30).toString('base64');
+  const refreshToken = randomBytes(30).toString('base64');
+  return {
+    userId,
+    accessToken,
+    refreshToken,
+    accessTokenValidUntil: new Date(Date.now() + ACCESS_TOKEN_LIFETIME),
+    refreshTokenValidUntil: new Date(Date.now() + REFRESH_TOKEN_LIFETIME),
+  };
+};
+
 export const registerUser = async (payload) => {
   const user = await UsersCollection.findOne({ email: payload.email });
   if (user) {
     throw createHttpError(409, 'Email in use');
   }
   const encryptedPassword = await hashValue(payload.password);
-  const accessToken = randomBytes(30).toString('base64');
   const newUser = await UsersCollection.create({
     ...payload,
-    accessToken,
     password: encryptedPassword,
   });
 
-  return newUser;
+  const session = createSession(newUser._id);
+  await SessionsCollection.create(session);
+
+  return { newUser, accessToken: session.accessToken };
 };
 
 export const loginUser = async (payload) => {
@@ -51,17 +64,6 @@ export const loginUser = async (payload) => {
 
 export const logoutUser = async (sessionId) => {
   await SessionsCollection.deleteOne({ _id: sessionId });
-};
-
-const createSession = () => {
-  const accessToken = randomBytes(30).toString('base64');
-  const refreshToken = randomBytes(30).toString('base64');
-  return {
-    accessToken,
-    refreshToken,
-    accessTokenValidUntil: new Date(Date.now() + ACCESS_TOKEN_LIFETIME),
-    refreshTokenValidUntil: new Date(Date.now() + REFRESH_TOKEN_LIFETIME),
-  };
 };
 
 export const refreshUsersSession = async ({ sessionId, refreshToken }) => {
