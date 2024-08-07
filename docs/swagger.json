@@ -582,21 +582,93 @@
                     },
                     "data": {
                       "type": "array",
-                      "required": [
-                        "date",
-                        "waterId"
-                      ],
-                      "properties": {
-                        "date": {
-                          "type": "string",
-                          "format": "date",
-                          "example": "2024-08-02"
-                        },
-                        "waterId": {
-                          "type": "string",
-                          "example": "65ca67e7ae7f10c88b598384"
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "_id",
+                          "amountOfWater",
+                          "time",
+                          "date",
+                          "dailyNorma",
+                          "totalAmount",
+                          "userId",
+                          "createdAt",
+                          "updatedAt"
+                        ],
+                        "properties": {
+                          "_id": {
+                            "type": "string",
+                            "example": "66b3bde3e4eebc5433d97cd5"
+                          },
+                          "amountOfWater": {
+                            "type": "number",
+                            "example": 200
+                          },
+                          "time": {
+                            "type": "string",
+                            "example": "12:15"
+                          },
+                          "date": {
+                            "type": "string",
+                            "format": "date-time",
+                            "example": "2024-07-07T00:00:00.000Z"
+                          },
+                          "dailyNorma": {
+                            "type": "number",
+                            "example": 1.5
+                          },
+                          "totalAmount": {
+                            "type": "number",
+                            "example": 0
+                          },
+                          "userId": {
+                            "type": "string",
+                            "example": "66acbaff8654757d2fc9bdba"
+                          },
+                          "createdAt": {
+                            "type": "string",
+                            "format": "date-time",
+                            "example": "2024-07-07T00:00:00.000Z"
+                          },
+                          "updatedAt": {
+                            "type": "string",
+                            "format": "date-time",
+                            "example": "2024-07-07T00:00:00.000Z"
+                          }
                         }
                       }
+                    }
+                  }
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "status": 200,
+                      "message": "Successfully found information about water!",
+                      "data": [
+                        {
+                          "_id": "66b3bde3e4eebc5433d97cd5",
+                          "amountOfWater": 200,
+                          "time": "12:15",
+                          "date": "2024-07-07T00:00:00.000Z",
+                          "dailyNorma": 1.5,
+                          "totalAmount": 0,
+                          "userId": "66acbaff8654757d2fc9bdba",
+                          "createdAt": "2024-07-07T00:00:00.000Z",
+                          "updatedAt": "2024-07-07T00:00:00.000Z"
+                        },
+                        {
+                          "_id": "66b3bde3e4eebc5433d47cf6",
+                          "amountOfWater": 100,
+                          "time": "09:00",
+                          "date": "2024-07-07T00:00:00.000Z",
+                          "dailyNorma": 1.5,
+                          "totalAmount": 0,
+                          "userId": "66acbaff8654757d2fc9bdba",
+                          "createdAt": "2024-08-07T00:00:00.000Z",
+                          "updatedAt": "2024-08-07T00:00:00.000Z"
+                        }
+                      ]
                     }
                   }
                 }
@@ -658,22 +730,94 @@
                       "example": "Successfully found information about water!"
                     },
                     "data": {
-                      "type": "object",
-                      "required": [
-                        "date",
-                        "waterId"
-                      ],
-                      "properties": {
-                        "date": {
-                          "type": "string",
-                          "format": "date",
-                          "example": "2024-08"
-                        },
-                        "waterId": {
-                          "type": "string",
-                          "example": "65ca67e7ae7f10c88b598384"
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "_id",
+                          "amountOfWater",
+                          "time",
+                          "date",
+                          "dailyNorma",
+                          "totalAmount",
+                          "userId",
+                          "createdAt",
+                          "updatedAt"
+                        ],
+                        "properties": {
+                          "_id": {
+                            "type": "string",
+                            "example": "66b3bde3e4eebc5433d97cd5"
+                          },
+                          "amountOfWater": {
+                            "type": "number",
+                            "example": 200
+                          },
+                          "time": {
+                            "type": "string",
+                            "example": "12:15"
+                          },
+                          "date": {
+                            "type": "string",
+                            "format": "date-time",
+                            "example": "2024-07-08T00:00:00.000Z"
+                          },
+                          "dailyNorma": {
+                            "type": "number",
+                            "example": 1.5
+                          },
+                          "totalAmount": {
+                            "type": "number",
+                            "example": 0
+                          },
+                          "userId": {
+                            "type": "string",
+                            "example": "66acbaff8654757d2fc9bdba"
+                          },
+                          "createdAt": {
+                            "type": "string",
+                            "format": "date-time",
+                            "example": "2024-07-07T00:00:00.000Z"
+                          },
+                          "updatedAt": {
+                            "type": "string",
+                            "format": "date-time",
+                            "example": "2024-07-07T00:00:00.000Z"
+                          }
                         }
                       }
+                    }
+                  }
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "status": 200,
+                      "message": "Successfully found information about water!",
+                      "data": [
+                        {
+                          "_id": "66b3bde3e4eebc5433d97cd5",
+                          "amountOfWater": 200,
+                          "time": "12:15",
+                          "date": "2024-07-08T00:00:00.000Z",
+                          "dailyNorma": 1.5,
+                          "totalAmount": 0,
+                          "userId": "66acbaff8654757d2fc9bdba",
+                          "createdAt": "2024-07-07T00:00:00.000Z",
+                          "updatedAt": "2024-07-07T00:00:00.000Z"
+                        },
+                        {
+                          "_id": "66b3bde3e4eebc5433d47cf6",
+                          "amountOfWater": 100,
+                          "time": "09:00",
+                          "date": "2024-08-07T00:00:00.000Z",
+                          "dailyNorma": 1.5,
+                          "totalAmount": 0,
+                          "userId": "66acbaff8654757d2fc9bdba",
+                          "createdAt": "2024-08-07T00:00:00.000Z",
+                          "updatedAt": "2024-08-07T00:00:00.000Z"
+                        }
+                      ]
                     }
                   }
                 }
@@ -892,35 +1036,16 @@
                       "example": "Successfully added water!"
                     },
                     "data": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/components/schemas/water"
-                      }
-                    }
-                  }
-                },
-                "examples": {
-                  "example-1": {
-                    "value": {
-                      "status": 201,
-                      "message": "Successfully added water!",
-                      "data": [
-                        {
-                          "amountOfWater": 50,
-                          "time": "12:15",
-                          "date": "2024-07-07"
-                        },
-                        {
-                          "amountOfWater": 75,
-                          "time": "14:30",
-                          "date": "2024-07-07"
-                        }
-                      ]
+                      "type": "object",
+                      "$ref": "#/components/schemas/water"
                     }
                   }
                 }
               }
             }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
           }
         }
       }
