@@ -3,7 +3,6 @@ tags:
 summary: Register user
 operationId: registerUser
 description: 'Register user'
-security: []
 requestBody:
   required: true
   content:
