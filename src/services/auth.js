@@ -10,7 +10,7 @@ import {
 
 export const registerUser = async (payload) => {
   const user = await UsersCollection.findOne({ email: payload.email });
-  await SessionsCollection.deleteOne({ userId: user._id });
+  await SessionsCollection.findOne({ userId: user._id });
   if (user) {
     throw createHttpError(409, 'Email in use');
   }
