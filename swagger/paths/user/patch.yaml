@@ -16,10 +16,6 @@ requestBody:
             description: 'User name'
             type: string
             example: 'Yaroslav Bliznyuk'
-          email:
-            description: 'Contact email'
-            type: string
-            example: 'bliznyuk.yaroslav@gmail.com'
           gender:
             description: 'User gender'
             type: string
