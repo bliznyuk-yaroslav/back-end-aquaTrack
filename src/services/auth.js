@@ -42,6 +42,7 @@ export const loginUser = async (payload) => {
   if (!user) {
     throw createHttpError(404, 'User not found');
   }
+
   const isEqual = await compareHash(payload.password, user.password);
   if (!isEqual) {
     throw createHttpError(401, 'Unauthorized');
@@ -49,17 +50,14 @@ export const loginUser = async (payload) => {
 
   await SessionsCollection.deleteOne({ userId: user._id });
 
-  const accessToken = randomBytes(30).toString('base64');
+  const session = createSession(user._id);
+  await SessionsCollection.create(session);
 
-  const refreshToken = randomBytes(30).toString('base64');
-
-  return await SessionsCollection.create({
+  return {
+    accessToken: session.accessToken,
+    refreshToken: session.refreshToken,
     userId: user._id,
-    accessToken,
-    refreshToken,
-    accessTokenValidUntil: new Date(Date.now() + ACCESS_TOKEN_LIFETIME),
-    refreshTokenValidUntil: new Date(Date.now() + REFRESH_TOKEN_LIFETIME),
-  });
+  };
 };
 
 export const logoutUser = async (sessionId) => {
@@ -79,10 +77,9 @@ export const refreshUsersSession = async ({ sessionId, refreshToken }) => {
   if (isSessionTokenExpired) {
     throw createHttpError(401, 'Session token expired');
   }
-  const newSession = createSession();
+  const newSession = createSession(session.userId);
   await SessionsCollection.deleteOne({ _id: sessionId, refreshToken });
-  return await SessionsCollection.create({
-    userId: session.userId,
-    ...newSession,
-  });
+  await SessionsCollection.create(newSession);
+
+  return newSession;
 };
