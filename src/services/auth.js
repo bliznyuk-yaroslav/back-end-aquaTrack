@@ -10,17 +10,14 @@ import {
 
 export const registerUser = async (payload) => {
   const user = await UsersCollection.findOne({ email: payload.email });
-  await SessionsCollection.findOne({ userId: user._id });
   if (user) {
     throw createHttpError(409, 'Email in use');
   }
   const encryptedPassword = await hashValue(payload.password);
   const accessToken = randomBytes(30).toString('base64');
-  const refreshToken = randomBytes(30).toString('base64');
   const newUser = await UsersCollection.create({
     ...payload,
     accessToken,
-    refreshToken,
     password: encryptedPassword,
   });
 
