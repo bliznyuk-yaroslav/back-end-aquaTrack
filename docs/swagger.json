@@ -43,6 +43,7 @@
         "summary": "Login user",
         "operationId": "loginUser",
         "description": "Login user",
+        "security": [],
         "requestBody": {
           "required": true,
           "content": {
@@ -157,6 +158,7 @@
         "summary": "Register user",
         "operationId": "registerUser",
         "description": "Register user",
+        "security": [],
         "requestBody": {
           "required": true,
           "content": {
