@@ -8,7 +8,6 @@ export const registerUserController = async (req, res, next) => {
       name: user.name,
       email: user.email,
       accessToken: user.accessToken,
-      userId: user._id, // додаємо userId
     };
     res.status(201).json({
       status: 201,
