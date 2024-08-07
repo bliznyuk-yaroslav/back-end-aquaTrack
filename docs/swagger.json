@@ -892,16 +892,35 @@
                       "example": "Successfully added water!"
                     },
                     "data": {
-                      "type": "object",
-                      "$ref": "#/components/schemas/water"
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/water"
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "status": 201,
+                      "message": "Successfully added water!",
+                      "data": [
+                        {
+                          "amountOfWater": 50,
+                          "time": "12:15",
+                          "date": "2024-07-07"
+                        },
+                        {
+                          "amountOfWater": 75,
+                          "time": "14:30",
+                          "date": "2024-07-07"
+                        }
+                      ]
                     }
                   }
                 }
               }
             }
-          },
-          "401": {
-            "$ref": "#/components/responses/401"
           }
         }
       }
