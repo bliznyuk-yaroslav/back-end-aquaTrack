@@ -18,14 +18,6 @@ properties:
     description: "User's name"
     type: string
     example: 'Yulia Shevchenko'
-  password:
-    description: "User's password"
-    type: string
-    example: '123456'
-  email:
-    description: "User's email"
-    type: string
-    example: 'test3@gmail.com'
   gender:
     description: "User's gender"
     type: string
@@ -47,9 +39,3 @@ properties:
     description: "Link to user's photo"
     type: string
     example: 'https://res.cloudinary.com/dxajyixgo/image/upload/v1721212524/kd9fbbmmnvvh2r0zl6xy.jpg'
-  accessToken:
-    description: "User's access token"
-    type: string
-  userId:
-    description: "User's id"
-    type: string

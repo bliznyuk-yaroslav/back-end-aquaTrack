@@ -38,10 +38,7 @@ responses:
               example: 'Avatar successfully added'
             data:
               type: object
-              properties:
-                avatarUrl:
-                  type: string
-                  example: 'https://res.cloudinary.com/do0wlj9zc/image/upload/v1722859993/avatar/oitqgedkh7wkk3dlv1jk.jpg'
+              $ref: ../../components/schemas/user.yaml
   '400':
     $ref: '../../components/responses/400.yaml'
   '401':

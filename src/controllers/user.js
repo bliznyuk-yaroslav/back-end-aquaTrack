@@ -5,6 +5,17 @@ import { saveFileToCloudinary } from '../utils/saveFileToCloudinary.js';
 import { env } from '../utils/env.js';
 import { updateAvatar } from '../services/user.js';
 import { updateUser } from '../services/user.js';
+const filterUserFields = (user) => {
+  return {
+    id: user._id,
+    name: user.name,
+    gender: user.gender,
+    weight: user.weight,
+    activityTime: user.activityTime,
+    dailyNorma: user.dailyNorma,
+    avatar: user.avatar,
+  };
+};
 export const getUserByIdController = async (req, res) => {
   const { _id: userId } = req.user;
   const user = await getUserById(userId);
@@ -15,10 +26,11 @@ export const getUserByIdController = async (req, res) => {
       data: { message: 'User not found' },
     });
   }
+  const userFilter = filterUserFields(user);
   res.status(200).json({
     status: 200,
     message: `Successfully found user with!`,
-    data: user,
+    data: userFilter,
   });
 };
 
@@ -36,10 +48,11 @@ export const updateUserController = async (req, res) => {
   if (!data) {
     throw createHttpError(404, 'There is no such user, unfortunately');
   }
+  const userFilter = filterUserFields(data.user);
   res.status(200).json({
     status: 200,
     message: 'Successful user change',
-    data: data.user,
+    data: userFilter,
   });
 };
 export const updateAvatarController = async (req, res) => {
@@ -60,9 +73,10 @@ export const updateAvatarController = async (req, res) => {
   if (!data) {
     throw createHttpError(404, 'There is no such user, unfortunately');
   }
+  const userFilter = filterUserFields(data.user);
   res.status(200).json({
     status: 200,
     message: 'Avatar successfully added',
-    data: data.user,
+    data: userFilter,
   });
 };

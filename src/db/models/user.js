@@ -41,7 +41,7 @@ const usersSchema = new Schema(
     },
     accessToken: {
       type: String,
-      default: "",
+      default: '',
     },
   },
   { timestamps: true, versionKey: false },
