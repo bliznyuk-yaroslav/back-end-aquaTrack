@@ -1,5 +1,5 @@
 tags:
-  - User
+  - Authentication
 summary: Register user
 operationId: registerUser
 description: 'Register user'
