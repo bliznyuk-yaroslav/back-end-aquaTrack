@@ -491,7 +491,7 @@
                       "example": "Successful user change"
                     },
                     "data": {
-                      "type": "object",
+                      "type": "array",
                       "$ref": "#/components/schemas/user"
                     }
                   }
@@ -513,53 +513,6 @@
           },
           "500": {
             "$ref": "#/components/responses/500"
-          }
-        },
-        "components": {
-          "schemas": {
-            "user": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "string",
-                  "example": "1a2b3c4d5e"
-                },
-                "name": {
-                  "type": "string",
-                  "example": "Yaroslav Bliznyuk"
-                },
-                "email": {
-                  "type": "string",
-                  "example": "bliznyuk.yaroslav@gmail.com"
-                },
-                "gender": {
-                  "type": "string",
-                  "example": "man"
-                },
-                "weight": {
-                  "type": "number",
-                  "example": 70
-                },
-                "activityTime": {
-                  "type": "number",
-                  "example": 8
-                },
-                "dailyNorma": {
-                  "type": "number",
-                  "example": 1.5
-                },
-                "createdAt": {
-                  "type": "string",
-                  "format": "date-time",
-                  "example": "2023-01-01T00:00:00Z"
-                },
-                "updatedAt": {
-                  "type": "string",
-                  "format": "date-time",
-                  "example": "2023-01-02T00:00:00Z"
-                }
-              }
-            }
           }
         }
       }
