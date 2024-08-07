@@ -32,7 +32,7 @@ responses:
               type: string
               example: Successfully found information about water!
             data:
-              type: object
+              type: array
               required:
                 - date
                 - waterId
