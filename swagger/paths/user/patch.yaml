@@ -16,6 +16,10 @@ requestBody:
             description: 'User name'
             type: string
             example: 'Yaroslav Bliznyuk'
+          email:
+            description: 'Contact email'
+            type: string
+            example: 'bliznyuk.yaroslav@gmail.com'
           gender:
             description: 'User gender'
             type: string
@@ -52,8 +56,8 @@ responses:
               type: string
               example: 'Successful user change'
             data:
-              type: array
-              $ref: ..\..\components\schemas\user.yaml
+              type: object
+              $ref: ../../components/schemas/user.yaml
   '400':
     $ref: '../../components/responses/400.yaml'
   '401':

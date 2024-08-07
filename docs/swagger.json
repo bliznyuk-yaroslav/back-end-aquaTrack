@@ -435,6 +435,11 @@
                     "type": "string",
                     "example": "Yaroslav Bliznyuk"
                   },
+                  "email": {
+                    "description": "Contact email",
+                    "type": "string",
+                    "example": "bliznyuk.yaroslav@gmail.com"
+                  },
                   "gender": {
                     "description": "User gender",
                     "type": "string",
@@ -486,7 +491,7 @@
                       "example": "Successful user change"
                     },
                     "data": {
-                      "type": "array",
+                      "type": "object",
                       "$ref": "#/components/schemas/user"
                     }
                   }
@@ -1201,7 +1206,10 @@
       "user": {
         "type": "object",
         "required": [
+          "_id",
           "name",
+          "email",
+          "password",
           "gender",
           "weight",
           "activityTime",
@@ -1209,10 +1217,25 @@
           "accessToken"
         ],
         "properties": {
+          "_id": {
+            "description": "User's id",
+            "type": "string",
+            "example": "66ab5e732a549b0ec4199ca1"
+          },
           "name": {
             "description": "User's name",
             "type": "string",
             "example": "Yulia Shevchenko"
+          },
+          "password": {
+            "description": "User's password",
+            "type": "string",
+            "example": "123456"
+          },
+          "email": {
+            "description": "User's email",
+            "type": "string",
+            "example": "test3@gmail.com"
           },
           "gender": {
             "description": "User's gender",
