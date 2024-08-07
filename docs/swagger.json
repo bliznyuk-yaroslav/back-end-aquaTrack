@@ -15,6 +15,11 @@
       "description": "Production server"
     }
   ],
+  "security": [
+    {
+      "bearerAuth": []
+    }
+  ],
   "tags": [
     {
       "name": "Authentication",
@@ -152,11 +157,7 @@
         "summary": "Register user",
         "operationId": "registerUser",
         "description": "Register user",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
+        "security": [],
         "requestBody": {
           "required": true,
           "content": {
