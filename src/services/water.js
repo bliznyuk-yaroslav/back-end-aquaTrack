@@ -26,12 +26,14 @@ export const patchWater = async (filter, payload, options = {}) => {
     };
 };
 
+
 export const deleteWater = async (waterId) => {
-    const water = await WaterCollection.findOneAndDelete({
-    waterId,
-    });
-    return water;
+  const water = await WaterCollection.findOneAndDelete({
+    _id: waterId,
+  });
+  return water;
 };
+
 
 export const getWaterConsumptionByDate = async (userId, date) => {
   const startDate = new Date(date);
