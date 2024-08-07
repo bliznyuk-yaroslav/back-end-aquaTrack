@@ -1,32 +1,16 @@
 type: object
 required:
-  - _id
   - name
-  - email
-  - password
   - gender
   - weight
   - activityTime
   - dailyNorma
-  - avatar
   - accessToken
 properties:
-  _id:
-    description: "User's id"
-    type: string
-    example: 66ab5e732a549b0ec4199ca1
   name:
     description: "User's name"
     type: string
     example: 'Yulia Shevchenko'
-  password:
-    description: "User's password"
-    type: string
-    example: '123456'
-  email:
-    description: "User's email"
-    type: string
-    example: 'test3@gmail.com'
   gender:
     description: "User's gender"
     type: string
