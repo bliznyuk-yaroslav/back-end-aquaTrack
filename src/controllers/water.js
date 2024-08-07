@@ -37,9 +37,9 @@ export const patchWaterController = async (req, res, next) => {
 };
 
 export const deleteWaterController = async (req, res, next) => {
-    const { userId } = req.params;
+    const { waterId } = req.params;
 
-    const water = await deleteWater(userId);
+    const water = await deleteWater(waterId);
 
     if (!water) {
         next(createHttpError(404, 'No amout of water found'));
