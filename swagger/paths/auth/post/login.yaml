@@ -3,8 +3,6 @@ tags:
 summary: Login user
 operationId: loginUser
 description: 'Login user'
-security:
-  - bearerAuth: []
 requestBody:
   required: true
   content:

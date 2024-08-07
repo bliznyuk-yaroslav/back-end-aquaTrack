@@ -20,10 +20,6 @@ requestBody:
             description: 'Contact email'
             type: string
             example: 'bliznyuk.yaroslav@gmail.com'
-          password:
-            description: 'User password'
-            type: string
-            example: 'yaroslav1999'
           gender:
             description: 'User gender'
             type: string
