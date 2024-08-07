@@ -1,53 +1,69 @@
-import { addWater, deleteWater, getMonthWater, getWaterConsumptionByDate, patchWater } from "../services/water.js";
-import createHttpError from "http-errors";
-
+import {
+  addWater,
+  deleteWater,
+  getMonthWater,
+  getWaterConsumptionByDate,
+  patchWater,
+} from '../services/water.js';
+import createHttpError from 'http-errors';
+const filterUserFields = (water) => {
+  return {
+    id: water._id,
+    amountOfWater: water.amountOfWater,
+    time: water.time,
+    date: water.date,
+    dailyNorma: water.dailyNorma,
+    totalAmount: water.totalAmount,
+    userId: water.userId,
+  };
+};
 export const addWaterController = async (req, res, next) => {
-    const { _id: userId } = req.user;
-    try {
-        const waterData = { ...req.body, userId };
-        const water = await addWater(waterData);
-         res.status(201).json({
-        status: 201,
-        message: 'Succesfully add water amount!',
-        data: water,
+  const { _id: userId } = req.user;
+  try {
+    const waterData = { ...req.body, userId };
+    const water = await addWater(waterData);
+    const userFilter = filterUserFields(water);
+    res.status(201).json({
+      status: 201,
+      message: 'Succesfully add water amount!',
+      data: userFilter,
     });
-    } catch (error) {
-        next(error);
-    }
+  } catch (error) {
+    next(error);
+  }
 };
 
 export const patchWaterController = async (req, res, next) => {
-    const { _id: userId } = req.user;
-    const { waterId } = req.params;
+  const { _id: userId } = req.user;
+  const { waterId } = req.params;
 
-    try {
-        const result = await patchWater({ _id: waterId, userId }, req.body);
-        if (!result) {
-            next(createHttpError(404, 'Water amount not found!'));
-            return next();
-        }
-        res.json({
-            status: 200,
-            message: 'Successfully patched amount of water!',
-            data: result.water,
-        });
-    } catch (error) {
-        next(error);
+  try {
+    const result = await patchWater({ _id: waterId, userId }, req.body);
+    if (!result) {
+      next(createHttpError(404, 'Water amount not found!'));
+      return next();
     }
+    res.json({
+      status: 200,
+      message: 'Successfully patched amount of water!',
+      data: result.water,
+    });
+  } catch (error) {
+    next(error);
+  }
 };
 
 export const deleteWaterController = async (req, res, next) => {
-    const { waterId } = req.params;
+  const { waterId } = req.params;
 
-    const water = await deleteWater(waterId);
+  const water = await deleteWater(waterId);
 
-    if (!water) {
-        next(createHttpError(404, 'No amout of water found'));
-        return;
-    }
-    res.status(204).send();
+  if (!water) {
+    next(createHttpError(404, 'No amout of water found'));
+    return;
+  }
+  res.status(204).send();
 };
-
 
 export const getWaterConsumptionController = async (req, res, next) => {
   try {
@@ -58,16 +74,18 @@ export const getWaterConsumptionController = async (req, res, next) => {
       return next(createHttpError(400, 'Date query parameter is required'));
     }
 
-    const { waterData, totalAmount, percentageConsumed } = await getWaterConsumptionByDate(userId, date);
+    const { waterData, totalAmount, percentageConsumed } =
+      await getWaterConsumptionByDate(userId, date);
+    const filteredWaterData = waterData.map(filterUserFields);
 
     res.status(200).json({
       status: 200,
       message: 'Successfully retrieved water consumption data!',
       data: {
-        waterData,
+        waterData: filteredWaterData,
         totalAmount,
-        percentageConsumed
-      }
+        percentageConsumed,
+      },
     });
   } catch (error) {
     next(error);
@@ -75,28 +93,37 @@ export const getWaterConsumptionController = async (req, res, next) => {
 };
 
 export const getMonthWaterController = async (req, res, next) => {
-    try {
-
+  try {
     const { _id: userId } = req.user;
-      const { date } = req.params;
+    const { date } = req.params;
 
-      const [year, month] = date.split("-");
+    const [year, month] = date.split('-');
 
-      const monthNumber = parseInt(month, 10);
-      const yearNumber = parseInt(year, 10);
+    const monthNumber = parseInt(month, 10);
+    const yearNumber = parseInt(year, 10);
 
-      if (isNaN(monthNumber) || isNaN(yearNumber) || monthNumber < 1 || monthNumber > 12) {
-        return res.status(400).json({ message: "Invalid date format! Use firstly year, then month" });
-  }
-
-      const waterMonth = await getMonthWater(userId, `${yearNumber}-${monthNumber}`);
-
-      res.status(200).json({
-        status: 200,
-        message: 'Successfully found amount of water for this month!',
-        data: waterMonth
-      });
-    } catch (error) {
-        next(error);
+    if (
+      isNaN(monthNumber) ||
+      isNaN(yearNumber) ||
+      monthNumber < 1 ||
+      monthNumber > 12
+    ) {
+      return res
+        .status(400)
+        .json({ message: 'Invalid date format! Use firstly year, then month' });
     }
+
+    const waterMonth = await getMonthWater(
+      userId,
+      `${yearNumber}-${monthNumber}`,
+    );
+
+    res.status(200).json({
+      status: 200,
+      message: 'Successfully found amount of water for this month!',
+      data: waterMonth,
+    });
+  } catch (error) {
+    next(error);
+  }
 };
