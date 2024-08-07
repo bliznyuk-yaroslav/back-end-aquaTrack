@@ -38,7 +38,7 @@
     "/auth/login": {
       "post": {
         "tags": [
-          "User"
+          "Authentication"
         ],
         "summary": "Login user",
         "operationId": "loginUser",
@@ -56,7 +56,7 @@
                 ],
                 "properties": {
                   "email": {
-                    "description": "User's email",
+                    "description": "User's email address. Must contain '@', with at least one letter or digit before and after it. Can include dots ('.') or hyphens ('-').",
                     "type": "string",
                     "example": "test3@gmail.com"
                   },
@@ -121,7 +121,7 @@
     "/auth/register": {
       "post": {
         "tags": [
-          "User"
+          "Authentication"
         ],
         "summary": "Register user",
         "operationId": "registerUser",
@@ -201,7 +201,7 @@
     "/auth/refresh": {
       "post": {
         "tags": [
-          "Session"
+          "Authentication"
         ],
         "summary": "Refresh session",
         "operationId": "refreshSession",
@@ -255,7 +255,7 @@
     "/auth/logout": {
       "post": {
         "tags": [
-          "Session"
+          "Authentication"
         ],
         "summary": "Logout user",
         "operationId": "logoutUser",

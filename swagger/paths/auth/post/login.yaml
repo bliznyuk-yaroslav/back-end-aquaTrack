@@ -1,5 +1,5 @@
 tags:
-  - User
+  - Authentication
 summary: Login user
 operationId: loginUser
 description: 'Login user'
@@ -15,7 +15,7 @@ requestBody:
           - password
         properties:
           email:
-            description: "User's email"
+            description: "User's email address. Must contain '@', with at least one letter or digit before and after it. Can include dots ('.') or hyphens ('-')."
             type: string
             example: 'test3@gmail.com'
           password:
