@@ -846,7 +846,8 @@
                 "type": "object",
                 "required": [
                   "amountOfWater",
-                  "time"
+                  "time",
+                  "date"
                 ],
                 "properties": {
                   "amountOfWater": {
@@ -858,6 +859,11 @@
                     "description": "Time when water was added",
                     "type": "string",
                     "example": "12:15"
+                  },
+                  "date": {
+                    "description": "Date when water was added",
+                    "type": "string",
+                    "example": "2024-07-07"
                   }
                 }
               }

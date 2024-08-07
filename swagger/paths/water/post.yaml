@@ -13,6 +13,7 @@ requestBody:
         required:
           - amountOfWater
           - time
+          - date
         properties:
           amountOfWater:
             description: 'Amount of water'
@@ -22,6 +23,10 @@ requestBody:
             description: 'Time when water was added'
             type: string
             example: '12:15'
+          date:
+            description: 'Date when water was added'
+            type: string
+            example: '2024-07-07'
 
 responses:
   '201':
