@@ -101,38 +101,6 @@
                         "userId": {
                           "type": "string",
                           "example": "66ab5e732a549b0ec4199ca1"
-                        },
-                        "email": {
-                          "type": "string",
-                          "example": "test3@gmail.com"
-                        },
-                        "name": {
-                          "type": "string",
-                          "example": "Yulia Shevchenko"
-                        },
-                        "gender": {
-                          "type": "string",
-                          "enum": [
-                            "woman",
-                            "man"
-                          ],
-                          "example": "woman"
-                        },
-                        "weight": {
-                          "type": "number",
-                          "example": 65
-                        },
-                        "activityTime": {
-                          "type": "number",
-                          "example": 8
-                        },
-                        "dailyNorma": {
-                          "type": "number",
-                          "example": 1.5
-                        },
-                        "avatar": {
-                          "type": "string",
-                          "example": "https://res.cloudinary.com/dxajyixgo/image/upload/v1721212524/kd9fbbmmnvvh2r0zl6xy.jpg"
                         }
                       }
                     }
@@ -213,41 +181,9 @@
                           "type": "string",
                           "example": "your_access_token"
                         },
-                        "userId": {
-                          "type": "string",
-                          "example": "66ab5e732a549b0ec4199ca1"
-                        },
                         "email": {
                           "type": "string",
                           "example": "test3@gmail.com"
-                        },
-                        "name": {
-                          "type": "string",
-                          "example": "Yulia Shevchenko"
-                        },
-                        "gender": {
-                          "type": "string",
-                          "enum": [
-                            "woman",
-                            "man"
-                          ],
-                          "example": "woman"
-                        },
-                        "weight": {
-                          "type": "number",
-                          "example": 65
-                        },
-                        "activityTime": {
-                          "type": "number",
-                          "example": 8
-                        },
-                        "dailyNorma": {
-                          "type": "number",
-                          "example": 1.5
-                        },
-                        "avatar": {
-                          "type": "string",
-                          "example": "https://res.cloudinary.com/dxajyixgo/image/upload/v1721212524/kd9fbbmmnvvh2r0zl6xy.jpg"
                         }
                       }
                     }
