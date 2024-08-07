@@ -46,18 +46,7 @@ responses:
               type: string
               example: Successfully added water!
             data:
-              type: array
-              items:
-                $ref: '../../components/schemas/water.yaml'
-        examples:
-          example-1:
-            value:
-              status: 201
-              message: Successfully added water!
-              data:
-                - amountOfWater: 50
-                  time: '12:15'
-                  date: '2024-07-07'
-                - amountOfWater: 75
-                  time: '14:30'
-                  date: '2024-07-07'
+              type: object
+              $ref: '../../components/schemas/water.yaml'
+  '401':
+    $ref: '../../components/responses/401.yaml'
