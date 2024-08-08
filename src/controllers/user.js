@@ -9,6 +9,7 @@ const filterUserFields = (user) => {
   return {
     id: user._id,
     name: user.name,
+    email: user.email,
     gender: user.gender,
     weight: user.weight,
     activityTime: user.activityTime,
