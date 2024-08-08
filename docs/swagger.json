@@ -618,6 +618,10 @@
                             "type": "string",
                             "example": "66acbaff8654757d2fc9bdba"
                           },
+                          "percentageConsumed": {
+                            "type": "string",
+                            "example": "13%"
+                          },
                           "createdAt": {
                             "type": "string",
                             "format": "date-time",
@@ -646,7 +650,8 @@
                           "date": "2024-07-07T00:00:00.000Z",
                           "dailyNorma": 1.5,
                           "totalAmount": 0,
-                          "userId": "66acbaff8654757d2fc9bdba"
+                          "userId": "66acbaff8654757d2fc9bdba",
+                          "percentageConsumed": "13%"
                         },
                         {
                           "_id": "66b3bde3e4eebc5433d47cf6",
@@ -655,7 +660,8 @@
                           "date": "2024-07-07T00:00:00.000Z",
                           "dailyNorma": 1.5,
                           "totalAmount": 0,
-                          "userId": "66acbaff8654757d2fc9bdba"
+                          "userId": "66acbaff8654757d2fc9bdba",
+                          "percentageConsumed": "13%"
                         }
                       ]
                     }
@@ -761,6 +767,10 @@
                             "type": "string",
                             "example": "66acbaff8654757d2fc9bdba"
                           },
+                          "percentage": {
+                            "type": "string",
+                            "example": "13%"
+                          },
                           "createdAt": {
                             "type": "string",
                             "format": "date-time",
@@ -789,7 +799,8 @@
                           "date": "2024-07-08T00:00:00.000Z",
                           "dailyNorma": 1.5,
                           "totalAmount": 0,
-                          "userId": "66acbaff8654757d2fc9bdba"
+                          "userId": "66acbaff8654757d2fc9bdba",
+                          "percentage": "13%"
                         },
                         {
                           "_id": "66b3bde3e4eebc5433d47cf6",
@@ -798,7 +809,8 @@
                           "date": "2024-08-07T00:00:00.000Z",
                           "dailyNorma": 1.5,
                           "totalAmount": 0,
-                          "userId": "66acbaff8654757d2fc9bdba"
+                          "userId": "66acbaff8654757d2fc9bdba",
+                          "percentage": "13%"
                         }
                       ]
                     }
