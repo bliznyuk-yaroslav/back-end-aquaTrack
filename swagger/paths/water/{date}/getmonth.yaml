@@ -65,6 +65,9 @@ responses:
                   userId:
                     type: string
                     example: '66acbaff8654757d2fc9bdba'
+                  percentage:
+                    type: string
+                    example: '13%'
                   createdAt:
                     type: string
                     format: date-time
@@ -86,6 +89,7 @@ responses:
                   dailyNorma: 1.5
                   totalAmount: 0
                   userId: '66acbaff8654757d2fc9bdba'
+                  percentage: '13%'
                 - _id: '66b3bde3e4eebc5433d47cf6'
                   amountOfWater: 100
                   time: '09:00'
@@ -93,6 +97,7 @@ responses:
                   dailyNorma: 1.5
                   totalAmount: 0
                   userId: '66acbaff8654757d2fc9bdba'
+                  percentage: '13%'
   '401':
     $ref: '../../../components/responses/401.yaml'
   '404':
