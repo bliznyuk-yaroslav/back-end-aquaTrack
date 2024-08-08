@@ -43,8 +43,6 @@ responses:
                   - dailyNorma
                   - totalAmount
                   - userId
-                  - createdAt
-                  - updatedAt
                 properties:
                   _id:
                     type: string
@@ -89,8 +87,6 @@ responses:
                   dailyNorma: 1.5
                   totalAmount: 0
                   userId: '66acbaff8654757d2fc9bdba'
-                  createdAt: '2024-07-07T00:00:00.000Z'
-                  updatedAt: '2024-07-07T00:00:00.000Z'
                 - _id: '66b3bde3e4eebc5433d47cf6'
                   amountOfWater: 100
                   time: '09:00'
@@ -98,9 +94,6 @@ responses:
                   dailyNorma: 1.5
                   totalAmount: 0
                   userId: '66acbaff8654757d2fc9bdba'
-                  createdAt: '2024-08-07T00:00:00.000Z'
-                  updatedAt: '2024-08-07T00:00:00.000Z'
-
   '401':
     $ref: '../../../components/responses/401.yaml'
   '404':
