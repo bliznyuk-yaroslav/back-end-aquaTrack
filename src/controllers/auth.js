@@ -1,4 +1,9 @@
-import { registerUser, loginUser, logoutUser, refreshUsersSession } from "../services/auth.js";
+import {
+  registerUser,
+  loginUser,
+  logoutUser,
+  refreshUsersSession,
+} from '../services/auth.js';
 import { REFRESH_TOKEN_LIFETIME } from '../constant/index.js';
 
 export const registerUserController = async (req, res, next) => {
@@ -6,7 +11,7 @@ export const registerUserController = async (req, res, next) => {
     const { newUser, accessToken } = await registerUser(req.body);
     res.status(201).json({
       status: 201,
-      message: "User successfully registered!",
+      message: 'User successfully registered!',
       data: {
         email: newUser.email,
         accessToken,
@@ -24,7 +29,7 @@ const setupSession = (res, session) => {
     sameSite: 'strict',
     expires: new Date(Date.now() + REFRESH_TOKEN_LIFETIME),
   });
-  res.cookie('sessionId', session._id, {
+  res.cookie('sessionId', session.userId, {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
     sameSite: 'strict',
