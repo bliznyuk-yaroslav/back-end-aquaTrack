@@ -15,13 +15,13 @@ requestBody:
           - password
         properties:
           email:
-            description: "User's email address. Must contain '@', with at least one letter or digit before and after it. Can include dots ('.') or hyphens ('-')."
+            description: "User's email address. Must contain '@', with at least one letter, digit, or underscore before and after it. Can include dots ('.') or hyphens ('-') between characters before and after '@'. Ends with a dot ('.') followed by 2 or 3 letters or digits. The email address must be at least 5 characters long and no longer than 50 characters."
             type: string
             example: 'test3@gmail.com'
           password:
-            description: "User's password"
+            description: "User's password. It must be at least 8 characters long and no longer than 50 characters."
             type: string
-            example: '123456'
+            example: '12345678'
 responses:
   '200':
     description: User successfully logged in

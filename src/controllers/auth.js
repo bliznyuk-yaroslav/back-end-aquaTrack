@@ -8,7 +8,6 @@ export const registerUserController = async (req, res, next) => {
       status: 201,
       message: "User successfully registered!",
       data: {
-        name: newUser.name,
         email: newUser.email,
         accessToken,
       },
