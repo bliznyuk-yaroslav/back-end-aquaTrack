@@ -1,16 +1,15 @@
 import { WaterCollection } from "../db/models/water.js";
+import { UsersCollection } from "../db/models/user.js";
 
 export const addWater = async (payload) => {
-  const createdAt = payload.date ? new Date(payload.date) : new Date();
-
-  const newPayload = { ...payload, createdAt };
-
-    const water = await WaterCollection.create(newPayload);
-    return water;
+const createdAt = payload.date ? new Date(payload.date) : new Date();
+const newPayload = { ...payload, createdAt };
+const water = await WaterCollection.create(newPayload);
+return water;
 };
 
 export const patchWater = async (filter, payload, options = {}) => {
-    const rawResult = await WaterCollection.findOneAndUpdate(
+const rawResult = await WaterCollection.findOneAndUpdate(
         filter,
         payload,
         {
@@ -28,12 +27,16 @@ export const patchWater = async (filter, payload, options = {}) => {
 
 
 export const deleteWater = async (waterId) => {
-  const water = await WaterCollection.findOneAndDelete({
+const water = await WaterCollection.findOneAndDelete({
     _id: waterId,
   });
   return water;
 };
 
+export const updateDailyNorma = async (userId, newDailyNorma) => {
+  await UsersCollection.updateOne({ _id: userId }, { $set: { dailyNorma: newDailyNorma } });
+  await WaterCollection.updateMany({ userId: userId }, { $set: { dailyNorma: newDailyNorma } });
+};
 
 export const getWaterConsumptionByDate = async (userId, date) => {
   const startDate = new Date(date);
@@ -68,7 +71,10 @@ export const getWaterConsumptionByDate = async (userId, date) => {
 };
 
 
+
 export const getMonthWater = async (userId, date) => {
+  const user = await UsersCollection.findOne({ _id: userId });
+  const userDailyNorma = user.dailyNorma || 1.5;
   const [year, month] = date.split("-");
   const startDate = new Date(Date.UTC(year, month - 1, 1));
   const endDate = new Date(Date.UTC(year, month, 0, 23, 59, 59, 999));
@@ -76,22 +82,22 @@ export const getMonthWater = async (userId, date) => {
   const waterMonth = await WaterCollection.aggregate([
     {
       $match: {
-    userId: userId,
-    createdAt: {
-      $gte: startDate,
-      $lte: endDate
+        userId: userId,
+        createdAt: {
+          $gte: startDate,
+          $lte: endDate
+        }
       }
-    }
     },
     
     {
       $group: {
         _id: {
-          year: { $year: "$createdAt"},
-          month: { $month: "$createdAt"},
-          day: { $dayOfMonth: "$createdAt"}
+          year: { $year: "$createdAt" },
+          month: { $month: "$createdAt" },
+          day: { $dayOfMonth: "$createdAt" }
         },
-        amountOfWater: { $sum: "$amountOfWater" }, 
+        amountOfWater: { $sum: "$amountOfWater" },
         dailyNorma: { $avg: "$dailyNorma" }
       }
     },
@@ -135,7 +141,8 @@ export const getMonthWater = async (userId, date) => {
   ];
 
   const totalMonthlyWater = waterMonth.reduce((sum, entry) => sum + (entry.amountOfWater || 0), 0);
-  const dailyWater = waterMonth.length > 0 ? waterMonth[0].dailyWater || 1.5 : 1.5;
+  // const dailyWater = waterMonth.length > 0 ? waterMonth[0].dailyWater || 1.5 : 1.5;
+  const dailyWater = userDailyNorma || (waterMonth.length > 0 ? waterMonth[0].dailyNorma || 1.5 : 1.5);
   const daysInMonth = new Date(year, month, 0).getDate();
   const totalMonthlyNorma = dailyWater * 1000 * daysInMonth;
 
@@ -143,7 +150,8 @@ export const getMonthWater = async (userId, date) => {
     const date = new Date(entry.date);
     const getMonth = date.getUTCMonth();
     const getDay = date.getUTCDate(); 
-    const dailyNorma = entry.dailyNorma || dailyWater;
+    const dailyNorma = userDailyNorma || entry.dailyNorma || dailyWater;
+    // const dailyNorma = entry.dailyNorma || dailyWater;
     // const totalAmount = entry.totalAmount || 0;
     const amountOfWater = entry.amountOfWater || 0;
 

@@ -4,6 +4,7 @@ import {
   getMonthWater,
   getWaterConsumptionByDate,
   patchWater,
+  updateDailyNorma,
 } from '../services/water.js';
 import createHttpError from 'http-errors';
 const filterUserFields = (water) => {
@@ -64,6 +65,23 @@ export const deleteWaterController = async (req, res, next) => {
   }
   res.status(204).send();
 };
+
+export const updateDailyNormaController = async (req, res) => {
+  try {
+    const userId = req.user._id;
+    const { dailyNorma } = req.body;
+
+    if (!dailyNorma) {
+      return res.status(400).json({ message: "Daily norma is required!" });
+    }
+    await updateDailyNorma(userId, dailyNorma);
+
+    return res.status(200).json({ message: "Daily norma updated successfully!" });
+  } catch (error) {
+    return res.sttus(500).json({ message: error.message });
+  }
+};
+
 
 export const getWaterConsumptionController = async (req, res, next) => {
   try {
