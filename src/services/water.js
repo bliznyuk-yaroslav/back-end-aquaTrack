@@ -2,8 +2,15 @@ import { WaterCollection } from "../db/models/water.js";
 import { UsersCollection } from "../db/models/user.js";
 
 export const addWater = async (payload) => {
-const createdAt = payload.date ? new Date(payload.date) : new Date();
-const newPayload = { ...payload, createdAt };
+  const user = await UsersCollection.findOne({ _id: payload.userId });
+  const userDailyNorma = user.dailyNorma || 1.5;
+  const createdAt = payload.date ? new Date(payload.date) : new Date();
+  const dailyNorma = payload.dailyNorma || userDailyNorma;
+  const newPayload = {
+    ...payload,
+    createdAt,
+    dailyNorma
+  };
 const water = await WaterCollection.create(newPayload);
 return water;
 };
@@ -39,6 +46,8 @@ export const updateDailyNorma = async (userId, newDailyNorma) => {
 };
 
 export const getWaterConsumptionByDate = async (userId, date) => {
+  const user = await UsersCollection.findOne({ _id: userId });
+  const userDailyNorma = user.dailyNorma || 1.5;
   const startDate = new Date(date);
   const endDate = new Date(date);
   endDate.setDate(startDate.getDate() + 1);
@@ -60,7 +69,8 @@ export const getWaterConsumptionByDate = async (userId, date) => {
   }
 
   const totalAmount = waterData.reduce((total, record) => total + record.amountOfWater, 0);
-  const dailyNorma = waterData[0].dailyNorma * 1000;
+  // const dailyNorma = waterData[0].dailyNorma * 1000;
+  const dailyNorma = userDailyNorma * 1000;
   const percentageConsumed = ((totalAmount / dailyNorma) * 100).toFixed(0) + "%";
 
   return {
@@ -98,7 +108,7 @@ export const getMonthWater = async (userId, date) => {
           day: { $dayOfMonth: "$createdAt" }
         },
         amountOfWater: { $sum: "$amountOfWater" },
-        dailyNorma: { $avg: "$dailyNorma" }
+        dailyNorma: { $first: "$dailyNorma" }
       }
     },
     {
@@ -141,18 +151,14 @@ export const getMonthWater = async (userId, date) => {
   ];
 
   const totalMonthlyWater = waterMonth.reduce((sum, entry) => sum + (entry.amountOfWater || 0), 0);
-  // const dailyWater = waterMonth.length > 0 ? waterMonth[0].dailyWater || 1.5 : 1.5;
-  const dailyWater = userDailyNorma || (waterMonth.length > 0 ? waterMonth[0].dailyNorma || 1.5 : 1.5);
   const daysInMonth = new Date(year, month, 0).getDate();
-  const totalMonthlyNorma = dailyWater * 1000 * daysInMonth;
+  const totalMonthlyNorma = waterMonth.reduce((total, entry) => total + (entry.dailyNorma || userDailyNorma) * 1000, 0);
 
   const result = waterMonth.map((entry) => {
     const date = new Date(entry.date);
     const getMonth = date.getUTCMonth();
     const getDay = date.getUTCDate(); 
-    const dailyNorma = userDailyNorma || entry.dailyNorma || dailyWater;
-    // const dailyNorma = entry.dailyNorma || dailyWater;
-    // const totalAmount = entry.totalAmount || 0;
+    const dailyNorma = entry.dailyNorma || userDailyNorma;
     const amountOfWater = entry.amountOfWater || 0;
 
 
@@ -160,12 +166,12 @@ export const getMonthWater = async (userId, date) => {
       date: `${months[getMonth]}, ${getDay}`,
       dailyNorma,
       amountOfWater,
-      percentage: Math.floor((amountOfWater / (dailyWater * 1000)) * 100) + '%',
+      percentage: Math.floor((amountOfWater / (dailyNorma * 1000)) * 100) + '%',
       // recordsWater: entry.entries ? entry.entries.length : 0,
     };
   });
 
-  const monthlyPercentage = Math.floor((totalMonthlyWater / totalMonthlyNorma) * 100);
+  const monthlyPercentage = totalMonthlyNorma > 0 ? Math.floor((totalMonthlyWater / totalMonthlyNorma) * 100) : 0;
 
   return {
     totalMonthlyWater: (totalMonthlyWater / 1000),
