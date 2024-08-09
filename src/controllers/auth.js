@@ -5,6 +5,7 @@ import {
   refreshUsersSession,
 } from '../services/auth.js';
 import { REFRESH_TOKEN_LIFETIME } from '../constant/index.js';
+import createHttpError from 'http-errors';
 
 export const registerUserController = async (req, res, next) => {
   try {
@@ -23,13 +24,14 @@ export const registerUserController = async (req, res, next) => {
 };
 
 const setupSession = (res, session) => {
-  res.cookie('refreshToken', session.refreshToken, {
+ res.cookie('refreshToken', session.refreshToken, {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
     sameSite: 'strict',
     expires: new Date(Date.now() + REFRESH_TOKEN_LIFETIME),
   });
-  res.cookie('sessionId', session.userId, {
+
+  res.cookie('sessionId', session._id || session.userId, {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
     sameSite: 'strict',
@@ -40,7 +42,6 @@ const setupSession = (res, session) => {
 export const loginUserController = async (req, res, next) => {
   try {
     const session = await loginUser(req.body);
-
     setupSession(res, session);
 
     res.json({
@@ -58,8 +59,9 @@ export const loginUserController = async (req, res, next) => {
 
 export const logoutUserController = async (req, res, next) => {
   try {
-    if (req.cookies.sessionId) {
-      await logoutUser(req.cookies.sessionId);
+    const { sessionId } = req.cookies;
+    if (sessionId) {
+      await logoutUser(sessionId);
     }
 
     res.clearCookie('sessionId');
@@ -72,10 +74,12 @@ export const logoutUserController = async (req, res, next) => {
 
 export const refreshUserSessionController = async (req, res, next) => {
   try {
-    const session = await refreshUsersSession({
-      sessionId: req.cookies.sessionId,
-      refreshToken: req.cookies.refreshToken,
-    });
+    const { sessionId, refreshToken } = req.cookies;
+    if (!sessionId || !refreshToken) {
+      return next(createHttpError(400, 'Invalid session'));
+    }
+
+    const session = await refreshUsersSession({ sessionId, refreshToken });
 
     setupSession(res, session);
 
