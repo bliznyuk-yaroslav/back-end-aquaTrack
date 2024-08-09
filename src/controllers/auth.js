@@ -7,22 +7,6 @@ import {
 import { REFRESH_TOKEN_LIFETIME } from '../constant/index.js';
 import createHttpError from 'http-errors';
 
-export const registerUserController = async (req, res, next) => {
-  try {
-    const { newUser, accessToken } = await registerUser(req.body);
-    res.status(201).json({
-      status: 201,
-      message: 'User successfully registered!',
-      data: {
-        email: newUser.email,
-        accessToken,
-      },
-    });
-  } catch (error) {
-    next(error);
-  }
-};
-
 const setupSession = (res, session) => {
  res.cookie('refreshToken', session.refreshToken, {
     httpOnly: true,
@@ -37,6 +21,26 @@ const setupSession = (res, session) => {
     sameSite: 'None',
     expires: new Date(Date.now() + REFRESH_TOKEN_LIFETIME),
   });
+};
+
+export const registerUserController = async (req, res, next) => {
+  try {
+    const { newUser, accessToken, sessionId, refreshToken } = await registerUser(req.body);
+
+    // Налаштування сесії через кукі
+    setupSession(res, { _id: sessionId, refreshToken });
+
+    res.status(201).json({
+      status: 201,
+      message: 'User successfully registered!',
+      data: {
+        email: newUser.email,
+        accessToken,
+      },
+    });
+  } catch (error) {
+    next(error);
+  }
 };
 
 export const loginUserController = async (req, res, next) => {

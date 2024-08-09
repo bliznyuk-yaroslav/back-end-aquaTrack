@@ -31,10 +31,15 @@ export const registerUser = async (payload) => {
     password: encryptedPassword,
   });
 
-  const session = createSession(newUser._id);
-  await SessionsCollection.create(session);
+const session = createSession(newUser._id);
+  const savedSession = await SessionsCollection.create(session);
 
-  return { newUser, accessToken: session.accessToken };
+  return {
+    newUser,
+    accessToken: savedSession.accessToken,
+    sessionId: savedSession._id,
+    refreshToken: savedSession.refreshToken
+  };
 };
 
 export const loginUser = async (payload) => {
