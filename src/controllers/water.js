@@ -14,7 +14,7 @@ const filterUserFields = (water) => {
     time: water.time,
     date: water.date,
     dailyNorma: water.dailyNorma,
-    totalAmount: water.totalAmount,
+    // totalAmount: water.totalAmount,
     userId: water.userId,
   };
 };
