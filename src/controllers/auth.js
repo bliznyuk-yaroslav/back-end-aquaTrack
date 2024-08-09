@@ -27,14 +27,14 @@ const setupSession = (res, session) => {
  res.cookie('refreshToken', session.refreshToken, {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
-    sameSite: 'strict',
+    sameSite: 'None',
     expires: new Date(Date.now() + REFRESH_TOKEN_LIFETIME),
   });
 
   res.cookie('sessionId', session._id || session.userId, {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
-    sameSite: 'strict',
+    sameSite: 'None',
     expires: new Date(Date.now() + REFRESH_TOKEN_LIFETIME),
   });
 };

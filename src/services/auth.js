@@ -42,24 +42,15 @@ export const loginUser = async (payload) => {
   if (!user) {
     throw createHttpError(404, 'User not found');
   }
-
   const isEqual = await compareHash(payload.password, user.password);
   if (!isEqual) {
     throw createHttpError(401, 'Unauthorized');
   }
-
   await SessionsCollection.deleteOne({ userId: user._id });
 
- const accessToken = randomBytes(30).toString('base64');
-  const refreshToken = randomBytes(30).toString('base64');
-
-  return await SessionsCollection.create({
-    userId: user._id,
-    accessToken,
-    refreshToken,
-    accessTokenValidUntil: new Date(Date.now() + ACCESS_TOKEN_LIFETIME),
-    refreshTokenValidUntil: new Date(Date.now() + REFRESH_TOKEN_LIFETIME),
-  });
+  const session = createSession(user._id);
+  const createdSession = await SessionsCollection.create(session);
+  return createdSession;
 };
 
 export const logoutUser = async (sessionId) => {
