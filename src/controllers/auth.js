@@ -10,13 +10,11 @@ import createHttpError from 'http-errors';
 const setupSession = (res, session) => {
   res.cookie('refreshToken', session.refreshToken, {
     httpOnly: true,
-    sameSite: 'None',
     expires: new Date(Date.now() + REFRESH_TOKEN_LIFETIME),
   });
 
   res.cookie('sessionId', session._id || session.userId, {
     httpOnly: true,
-    sameSite: 'None',
     expires: new Date(Date.now() + REFRESH_TOKEN_LIFETIME),
   });
 };
