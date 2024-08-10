@@ -8,16 +8,14 @@ import { REFRESH_TOKEN_LIFETIME } from '../constant/index.js';
 import createHttpError from 'http-errors';
 
 const setupSession = (res, session) => {
- res.cookie('refreshToken', session.refreshToken, {
+  res.cookie('refreshToken', session.refreshToken, {
     httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
     sameSite: 'None',
     expires: new Date(Date.now() + REFRESH_TOKEN_LIFETIME),
   });
 
   res.cookie('sessionId', session._id || session.userId, {
     httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
     sameSite: 'None',
     expires: new Date(Date.now() + REFRESH_TOKEN_LIFETIME),
   });
@@ -25,7 +23,8 @@ const setupSession = (res, session) => {
 
 export const registerUserController = async (req, res, next) => {
   try {
-    const { newUser, accessToken, sessionId, refreshToken } = await registerUser(req.body);
+    const { newUser, accessToken, sessionId, refreshToken } =
+      await registerUser(req.body);
 
     // Налаштування сесії через кукі
     setupSession(res, { _id: sessionId, refreshToken });
