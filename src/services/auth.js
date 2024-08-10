@@ -31,14 +31,14 @@ export const registerUser = async (payload) => {
     password: encryptedPassword,
   });
 
-const session = createSession(newUser._id);
+  const session = createSession(newUser._id);
   const savedSession = await SessionsCollection.create(session);
 
   return {
     newUser,
     accessToken: savedSession.accessToken,
     sessionId: savedSession._id,
-    refreshToken: savedSession.refreshToken
+    refreshToken: savedSession.refreshToken,
   };
 };
 
@@ -78,8 +78,10 @@ export const refreshUsersSession = async ({ sessionId, refreshToken }) => {
   }
 
   const newSession = createSession(session.userId);
-  await SessionsCollection.deleteOne({ _id: sessionId });
-  await SessionsCollection.create(newSession);
+  await SessionsCollection.deleteOne({ _id: sessionId, refreshToken });
 
-  return newSession;
+  return await SessionsCollection.create({
+    userId: session.userId,
+    ...newSession,
+  });
 };
