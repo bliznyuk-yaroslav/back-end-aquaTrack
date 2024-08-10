@@ -76,25 +76,18 @@ export const logoutUserController = async (req, res, next) => {
   }
 };
 
-export const refreshUserSessionController = async (req, res, next) => {
-  try {
-    const { sessionId, refreshToken } = req.cookies;
-    if (!sessionId || !refreshToken) {
-      return next(createHttpError(400, 'Invalid session'));
-    }
+export const refreshUserSessionController = async (req, res) => {
+  const session = await refreshUsersSession({
+    sessionId: req.cookies.sessionId,
+    refreshToken: req.cookies.refreshToken,
+  });
 
-    const session = await refreshUsersSession({ sessionId, refreshToken });
-
-    setupSession(res, session);
-
-    res.json({
-      status: 200,
-      message: 'Successfully refreshed a session!',
-      data: {
-        accessToken: session.accessToken,
-      },
-    });
-  } catch (error) {
-    next(error);
-  }
+  setupSession(res, session);
+  res.json({
+    status: 200,
+    message: 'Successfully refreshed a session!',
+    data: {
+      accessToken: session.accessToken,
+    },
+  });
 };
