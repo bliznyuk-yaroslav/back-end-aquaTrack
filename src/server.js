@@ -10,6 +10,11 @@ import notFoundHandler from './middlewares/notFoundHandler.js';
 import { UPLOAD_DIR } from './constant/index.js';
 
 const PORT = Number(env('PORT', '3000'));
+const allowedOrigins = [
+  'http://localhost:3000',
+  'https://fosssoft.github.io/project-04/',
+];
+const corsOptions = { origin: allowedOrigins, credentials: true };
 export const setupServer = () => {
   const app = express();
   app.use(
@@ -19,7 +24,7 @@ export const setupServer = () => {
       },
     }),
   );
-  app.use(cors());
+  app.use(cors(corsOptions));
   app.use(express.json());
   app.use(cookieParser());
   app.use('/uploads', express.static(UPLOAD_DIR));
