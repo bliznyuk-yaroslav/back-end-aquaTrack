@@ -13,7 +13,7 @@ import setCookies from './middlewares/setCookies.js';
 const PORT = Number(env('PORT', '3000'));
 const allowedOrigins = [
   'http://localhost:3000',
-  'https://fosssoft.github.io/project-04/',
+  'https://fosssoft.github.io/project-04',
 ];
 const corsOptions = { origin: allowedOrigins, credentials: true };
 export const setupServer = () => {
