@@ -5,7 +5,6 @@ import {
   refreshUsersSession,
 } from '../services/auth.js';
 import { REFRESH_TOKEN_LIFETIME } from '../constant/index.js';
-import createHttpError from 'http-errors';
 
 const setupSession = (res, session) => {
   res.cookie('refreshToken', session.refreshToken, {

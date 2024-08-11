@@ -5,6 +5,7 @@ import { saveFileToCloudinary } from '../utils/saveFileToCloudinary.js';
 import { env } from '../utils/env.js';
 import { updateAvatar } from '../services/user.js';
 import { updateUser } from '../services/user.js';
+import { countUser } from '../services/user.js';
 const filterUserFields = (user) => {
   return {
     id: user._id,
@@ -80,4 +81,13 @@ export const updateAvatarController = async (req, res) => {
     message: 'Avatar successfully added',
     data: userFilter,
   });
+};
+
+export const countUserController = async (req, res, next) => {
+  try {
+    const count = await countUser();
+    res.json({ totalUsers: count });
+  } catch (error) {
+    next(error);
+  }
 };
