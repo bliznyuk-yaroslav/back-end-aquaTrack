@@ -10,11 +10,15 @@ import { resetPassword } from '../services/auth.js';
 
 const setupSession = (res, session) => {
   res.cookie('refreshToken', session.refreshToken, {
+    secury: true,
+    sameSite: 'None',
     httpOnly: true,
     expires: new Date(Date.now() + REFRESH_TOKEN_LIFETIME),
   });
 
   res.cookie('sessionId', session._id || session.userId, {
+    secury: true,
+    sameSite: 'None',
     httpOnly: true,
     expires: new Date(Date.now() + REFRESH_TOKEN_LIFETIME),
   });
