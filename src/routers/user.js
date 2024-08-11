@@ -10,8 +10,10 @@ import { validateBody } from '../middlewares/validateBody.js';
 import isValid from '../middlewares/isValid.js';
 import { upload } from '../middlewares/multer.js';
 import { updateUserSchema } from '../validation/user.js';
+import { countUserController } from '../controllers/user.js';
 
 const router = Router();
+router.get('/count', ctrlWrapper(countUserController));
 router.use(authenticate);
 router.get('/', isValid, ctrlWrapper(getUserByIdController));
 router.patch(

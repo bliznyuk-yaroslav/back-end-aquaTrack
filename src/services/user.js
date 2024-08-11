@@ -32,3 +32,7 @@ export const updateAvatar = async (id, payload = {}) => {
     isNew: Boolean(rawResult?.lastErrorObject?.upsert),
   };
 };
+
+export const countUser = async () => {
+  return await UsersCollection.countDocuments();
+};
