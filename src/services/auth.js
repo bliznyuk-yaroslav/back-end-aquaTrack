@@ -57,7 +57,7 @@ export const loginUser = async (payload) => {
   }
   const isEqual = await compareHash(payload.password, user.password);
   if (!isEqual) {
-    throw createHttpError(401, 'Unauthorized');
+    throw createHttpError(404, 'Unauthorized');
   }
   await SessionsCollection.deleteOne({ userId: user._id });
 
