@@ -122,7 +122,7 @@ export const requestResetToken = async (email) => {
   const template = handlebars.compile(templateSource);
   const html = template({
     email: user.email,
-    link: `${env('APP_DOMAIN')}/reset-password?token=${resetToken}`,
+    link: `${env('APP_DOMAIN')}/project-04/reset-password?token=${resetToken}`,
   });
   console.log()
   try {
