@@ -9,4 +9,3 @@ const bootstrap = async () => {
   setupServer();
 };
 bootstrap();
-// mongodb+srv://bliznyukyaroslav1999:sZSDp1KL0Kr8CdZs@cluster0.utuj3wa.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0

@@ -2,29 +2,33 @@ import {
   registerUser,
   loginUser,
   logoutUser,
+  requestResetToken,
   refreshUsersSession,
 } from '../services/auth.js';
 import { REFRESH_TOKEN_LIFETIME } from '../constant/index.js';
+import { resetPassword } from '../services/auth.js';
+
 
 const setupSession = (res, session) => {
- res.cookie('refreshToken', session.refreshToken, {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
+  res.cookie('refreshToken', session.refreshToken, {
+    secury: true,
     sameSite: 'None',
+    httpOnly: true,
     expires: new Date(Date.now() + REFRESH_TOKEN_LIFETIME),
   });
 
   res.cookie('sessionId', session._id || session.userId, {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
+    secury: true,
     sameSite: 'None',
+    httpOnly: true,
     expires: new Date(Date.now() + REFRESH_TOKEN_LIFETIME),
   });
 };
 
 export const registerUserController = async (req, res, next) => {
   try {
-    const { newUser, accessToken, sessionId, refreshToken } = await registerUser(req.body);
+    const { newUser, accessToken, sessionId, refreshToken } =
+      await registerUser(req.body);
 
     setupSession(res, { _id: sessionId, refreshToken });
 
@@ -81,11 +85,30 @@ export const refreshUserSessionController = async (req, res) => {
   });
 
   setupSession(res, session);
+
   res.json({
     status: 200,
     message: 'Successfully refreshed a session!',
     data: {
       accessToken: session.accessToken,
     },
+  });
+};
+
+export const requestResetEmailController = async (req, res) => {
+  await requestResetToken(req.body.email);
+  res.json({
+    message: 'Reset password email has been successfully sent.',
+    status: 200,
+    data: {},
+  });
+};
+
+export const resetPasswordController = async (req, res) => {
+  await resetPassword(req.body);
+  res.json({
+    message: 'Password was successfully reset!',
+    status: 200,
+    data: {},
   });
 };
