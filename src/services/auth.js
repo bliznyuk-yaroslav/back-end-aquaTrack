@@ -57,7 +57,7 @@ export const loginUser = async (payload) => {
   }
   const isEqual = await compareHash(payload.password, user.password);
   if (!isEqual) {
-    throw createHttpError(401, 'Unauthorized');
+    throw createHttpError(404, 'Unauthorized');
   }
   await SessionsCollection.deleteOne({ userId: user._id });
 
@@ -124,7 +124,6 @@ export const requestResetToken = async (email) => {
     email: user.email,
     link: `${env('APP_DOMAIN')}/project-04/reset-password/${resetToken}`,
   });
-  console.log()
   try {
     await sendEmail({
       from: env(SMTP.SMTP_FROM),
