@@ -8,6 +8,7 @@ import {
 import { REFRESH_TOKEN_LIFETIME } from '../constant/index.js';
 import { resetPassword } from '../services/auth.js';
 
+
 const setupSession = (res, session) => {
   res.cookie('refreshToken', session.refreshToken, {
     secury: true,
@@ -29,7 +30,6 @@ export const registerUserController = async (req, res, next) => {
     const { newUser, accessToken, sessionId, refreshToken } =
       await registerUser(req.body);
 
-    // Налаштування сесії через кукі
     setupSession(res, { _id: sessionId, refreshToken });
 
     res.status(201).json({
