@@ -1,0 +1,43 @@
+tags:
+  - Authentication
+summary: Send email
+operationId: sendEmail
+description: 'Sending a message to recover your password'
+security: []
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - email
+        properties:
+          email:
+            description: "User's email address. Must contain '@', with at least one letter or digit before and after it. Can include dots ('.') or hyphens ('-')."
+            type: string(email)
+            example: 'test3@gmail.com'
+            minLength: 6
+responses:
+  '200':
+    description: Reset password email has been successfully sent
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+          properties:
+            status:
+              type: integer
+              example: 200
+            message:
+              type: string
+              example: Reset password email has been successfully sent
+  '401':
+    $ref: '../../../components/responses/401.yaml'
+  '404':
+    $ref: '../../../components/responses/404.yaml'
+  '500':
+    $ref: '../../../components/responses/500.yaml'
