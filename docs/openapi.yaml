@@ -44,12 +44,12 @@ paths:
     post:
       $ref: '../swagger/paths/auth/post/logout.yaml'
  
-  /user:
-    get:
-      $ref: '../swagger/paths/user/get.yaml'
   /user/count:
     get:
       $ref: '../swagger/paths/user/get-user.yaml'
+  /user:
+    get:
+      $ref: '../swagger/paths/user/get.yaml'
   /user/update:
     patch:
       $ref: '../swagger/paths/user/patch.yaml'
