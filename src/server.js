@@ -11,7 +11,7 @@ import { UPLOAD_DIR } from './constant/index.js';
 import setCookies from './middlewares/setCookies.js';
 
 const PORT = Number(env('PORT', '3000'));
-const allowedOrigins = ['http://localhost:3000', 'https://fosssoft.github.io'];
+const allowedOrigins = ['https://fosssoft.github.io'];
 const corsOptions = { origin: allowedOrigins, credentials: true };
 export const setupServer = () => {
   const app = express();
