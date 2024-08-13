@@ -24,8 +24,6 @@ export const registerUserController = async (req, res, next) => {
   try {
     const { newUser, accessToken, sessionId, refreshToken } =
       await registerUser(req.body);
-
-    // Налаштування сесії через кукі
     setupSession(res, { _id: sessionId, refreshToken });
 
     res.status(201).json({
@@ -96,7 +94,6 @@ export const requestResetEmailController = async (req, res) => {
   res.json({
     message: 'Reset password email has been successfully sent.',
     status: 200,
-    data: {},
   });
 };
 
@@ -105,6 +102,5 @@ export const resetPasswordController = async (req, res) => {
   res.json({
     message: 'Password was successfully reset!',
     status: 200,
-    data: {},
   });
 };

@@ -124,7 +124,6 @@ export const requestResetToken = async (email) => {
     email: user.email,
     link: `${env('APP_DOMAIN')}/project-04/reset-password/${resetToken}`,
   });
-  console.log()
   try {
     await sendEmail({
       from: env(SMTP.SMTP_FROM),

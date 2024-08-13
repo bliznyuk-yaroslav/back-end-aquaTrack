@@ -1,0 +1,19 @@
+tags:
+  - User
+summary: Number of registered users
+operationId: getUserCount
+description: 'Get user count'
+security: []
+responses:
+  '200':
+    description: 'Get User Count'
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            totalUsers: 
+              type: number
+              example: 42
+  '500':
+    $ref: ../../components/responses/500.yaml

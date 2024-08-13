@@ -76,7 +76,7 @@ export const getWaterConsumptionByDate = async (userId, date) => {
     (total, record) => total + record.amountOfWater,
     0,
   );
-  // const dailyNorma = waterData[0].dailyNorma * 1000;
+  
   const dailyNorma = userDailyNorma * 1000;
   const percentageConsumed =
     ((totalAmount / dailyNorma) * 100).toFixed(0) + '%';
@@ -173,7 +173,6 @@ export const getMonthWater = async (userId, date) => {
       dailyNorma: userDailyNorma,
       amountOfWater,
       percentage: Math.floor((amountOfWater / (dailyNorma * 1000)) * 100) + '%',
-      // recordsWater: entry.entries ? entry.entries.length : 0,
     };
   });
 
@@ -189,5 +188,3 @@ export const getMonthWater = async (userId, date) => {
     records: result,
   };
 };
-
-// рекордс - раптом треба вивести всі записи про додану воду за місяць
