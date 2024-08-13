@@ -294,14 +294,14 @@
                 ],
                 "properties": {
                   "password": {
-                    "description": "User's password",
+                    "description": "New User password",
                     "type": "string",
                     "example": "123456"
                   },
                   "token": {
                     "description": "JWT token for recovery, lives 5 minutes",
                     "type": "string",
-                    "exemple": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NmI4NzM0YjJkZDRlMWYxODBiZWU0YWUiLCJlbWFpbCI6InNvc2lkMTk5OUBnbWFpbC5jb20iLCJpYXQiOjE3MjM0OTUxNDgsImV4cCI6MTcyMzQ5NTQ0OH0.Nvsmsva_EujFI8Vlc6xkl2yj7kpyAaM2kgGit-mfrfI"
+                    "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NmI4NzM0YjJkZDRlMWYxODBiZWU0YWUiLCJlbWFpbCI6InNvc2lkMTk5OUBnbWFpbC5jb20iLCJpYXQiOjE3MjM0OTUxNDgsImV4cCI6MTcyMzQ5NTQ0OH0.Nvsmsva_EujFI8Vlc6xkl2yj7kpyAaM2kgGit-mfrfI"
                   }
                 }
               }
